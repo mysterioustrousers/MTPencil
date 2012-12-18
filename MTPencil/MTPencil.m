@@ -161,6 +161,9 @@ typedef enum {
 
 
 
+
+
+
 #pragma mark Moving
 
 - (void)moveTo:(CGPoint)point
@@ -231,12 +234,16 @@ typedef enum {
 
 
 
-- (void)draw
+
+
+- (void)animate
 {
-    CGContextRef context = UIGraphicsGetCurrentContext(); // Won't work on Mac, need to switch to NSBezierPath
+    if (&UIGraphicsGetCurrentContext)
+        [self animateInGraphicsContext:UIGraphicsGetCurrentContext()];
+}
 
-	CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
-
+- (void)animateInGraphicsContext:(CGContextRef)context
+{
 	for (MTDrawingStep *step in _steps) {
 
 		step.startPoint = _currentStartPoint;
@@ -286,7 +293,6 @@ typedef enum {
 	else {
 		if (_completionBlock) _completionBlock(self);
 	}
-
 }
 
 

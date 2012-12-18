@@ -38,7 +38,7 @@ typedef enum {
 
 @interface MTPencil : NSObject
 
-@property (nonatomic) NSUInteger framesPerSecond;
+@property (nonatomic) NSUInteger    framesPerSecond;
 
 
 + (MTPencil *)pencilDrawingInView:(UIView *)view;
@@ -60,7 +60,10 @@ typedef enum {
 #pragma mark - Implement
 
 - (void)beginWithCompletion:(MTPencilBlock)completion; // call this to begin drawing the shape
-- (void)draw; // You MUST call this from within the drawRect: function of the view you want to draw in.
+
+ // You MUST call one of these from within the drawRect: function of the view you want to draw in.
+- (void)animate;                                          // Can be used for iOS but no Mac OS
+- (void)animateInGraphicsContext:(CGContextRef)context;   // Can be used if you want to customize the graphics context
 
 
 #pragma mark - Helpers

@@ -38,6 +38,7 @@
 	[_pencil drawAtAngle:MTPencilAngleLeft		distance:100	speed:speed];
 	[_pencil drawAtAngle:MTPencilAngleUp		distance:123	speed:speed];
 	[_pencil drawAtAngle:MTPencilAngleUpLeft	distance:20     speed:speed];
+    [_pencil drawTo:CGPointMake(200, 200) speed:speed];
 	[_pencil beginWithCompletion:^(MTPencil *pencil) {
 
     }];
