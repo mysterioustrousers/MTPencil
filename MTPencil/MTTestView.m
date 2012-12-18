@@ -45,7 +45,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-	[_pencil drawInContext:UIGraphicsGetCurrentContext()];
+	[_pencil draw];
 }
 
 

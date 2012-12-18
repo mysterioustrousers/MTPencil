@@ -60,7 +60,7 @@ typedef enum {
 #pragma mark - Implement
 
 - (void)beginWithCompletion:(MTPencilBlock)completion; // call this to begin drawing the shape
-- (void)drawInContext:(CGContextRef)context; // You MUST call this from within the drawRect: function of the view you want to draw in.
+- (void)draw; // You MUST call this from within the drawRect: function of the view you want to draw in.
 
 
 #pragma mark - Helpers

@@ -231,9 +231,9 @@ typedef enum {
 
 
 
-- (void)drawInContext:(CGContextRef)context
+- (void)draw
 {
-//    CGContextRef context = UIGraphicsGetCurrentContext(); // Won't work on Mac, need to switch to NSBezierPath
+    CGContextRef context = UIGraphicsGetCurrentContext(); // Won't work on Mac, need to switch to NSBezierPath
 
 	CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
 
