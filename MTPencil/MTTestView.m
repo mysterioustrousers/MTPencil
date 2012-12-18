@@ -24,24 +24,23 @@
 @implementation MTTestView
 
 
-- (void)awakeFromNib
-{
-}
-
 - (void)draw
 {
-	_pencil = [MTPencil pencilDrawingInView:self];
-	[_pencil moveTo:CGPointMake(100, 100)];
-	[_pencil drawAtAngle:MTPencilAngleUpRight	distance:20     speed:PPS];
-	[_pencil drawAtAngle:MTPencilAngleUp		distance:50     speed:PPS];
-	[_pencil drawAtAngle:MTPencilAngleRight		distance:100	speed:PPS];
-	[_pencil drawAtAngle:MTPencilAngleDown		distance:200	speed:PPS];
-	[_pencil drawAtAngle:MTPencilAngleLeft		distance:100	speed:PPS];
-	[_pencil drawAtAngle:MTPencilAngleUp		distance:123	speed:PPS];
-	[_pencil drawAtAngle:MTPencilAngleUpLeft	distance:20     speed:PPS];
-	[_pencil beginWithCompletion:^{
+    MTPencilSpeed speed = MTPencilSpeedVerySlow;
 
-	}];
+	_pencil = [MTPencil pencilDrawingInView:self];
+
+	[_pencil moveTo:CGPointMake(100, 100)];
+	[_pencil drawAtAngle:MTPencilAngleUpRight	distance:20     speed:speed];
+	[_pencil drawAtAngle:MTPencilAngleUp		distance:50     speed:speed];
+	[_pencil drawAtAngle:MTPencilAngleRight		distance:100	speed:speed];
+	[_pencil drawAtAngle:MTPencilAngleDown		distance:200	speed:speed];
+	[_pencil drawAtAngle:MTPencilAngleLeft		distance:100	speed:speed];
+	[_pencil drawAtAngle:MTPencilAngleUp		distance:123	speed:speed];
+	[_pencil drawAtAngle:MTPencilAngleUpLeft	distance:20     speed:speed];
+	[_pencil beginWithCompletion:^(MTPencil *pencil) {
+
+    }];
 }
 
 - (void)drawRect:(CGRect)rect

@@ -82,9 +82,23 @@ typedef enum {
 	_currentPoint	= startPoint;
 	if (_endType == MTDrawingStepDestinationTypeAbsolute) {
 		_length = CGPointDistance(startPoint, _endPoint);
-        NSTimeInterval duration = [MTPencil durationForSpeed:_speed overDistance:_length];
-        _totalFrames = duration / _pencil.framesPerSecond;
+        if (_type == MTDrawingStepTypeDraw) {
+            NSTimeInterval duration = [MTPencil durationForSpeed:_speed overDistance:_length];
+            _totalFrames = duration * _pencil.framesPerSecond;
+        }
 	}
+}
+
+- (void)setEndPoint:(CGPoint)endPoint
+{
+    _endPoint = endPoint;
+    if (_endType == MTDrawingStepDestinationTypeRelative) {
+        _length = CGPointDistance(_startPoint, endPoint);
+        if (_type == MTDrawingStepTypeDraw) {
+            NSTimeInterval duration = [MTPencil durationForSpeed:_speed overDistance:_length];
+            _totalFrames = duration * _pencil.framesPerSecond;
+        }
+    }
 }
 
 @end
@@ -109,7 +123,7 @@ typedef enum {
 @interface MTPencil ()
 @property (strong, nonatomic)   UIView              *view;
 @property (strong, nonatomic)	NSMutableArray		*steps;
-@property (nonatomic)			CGPoint				currentPoint;
+@property (nonatomic)			CGPoint				currentStartPoint;
 @property (nonatomic)			dispatch_queue_t	queue;
 @property (nonatomic, strong)	MTPencilBlock		completionBlock;
 @end
@@ -128,6 +142,7 @@ typedef enum {
 		_steps				= [NSMutableArray array];
 		_completionBlock	= nil;
         _framesPerSecond    = 60.0;
+        _currentStartPoint  = CGPointZero;
     }
     return self;
 }
@@ -224,50 +239,37 @@ typedef enum {
 
 	for (MTDrawingStep *step in _steps) {
 
-		step.startPoint = _currentPoint;
+		step.startPoint = _currentStartPoint;
 		CGContextMoveToPoint(context, step.startPoint.x, step.startPoint.y);
 
-        if (step.currentFrame == 0) {
-//            step calculateEndPoint
+        if (step.endType == MTDrawingStepDestinationTypeRelative && step.currentFrame == 1) {
+            CGPoint endPoint;
+            endPoint = CGPointMake(step.startPoint.x + step.length, step.startPoint.y);
+            endPoint = CGPointRotatedAroundPoint(endPoint, step.startPoint, step.angle);
+            step.endPoint = endPoint;
         }
 
 		CGFloat stepLength	= step.length / step.totalFrames;
-        
+
 		CGPoint nextPoint;
-
-		if (step.endType == MTDrawingStepDestinationTypeAbsolute) {
-
+        if (stepLength  > 0)
             nextPoint = CGPointAlongLine(CGLineMake(step.startPoint, step.endPoint), (stepLength * step.currentFrame));
+        else
+            nextPoint = step.currentPoint;
 
-			if (step.type == MTDrawingStepTypeDraw) {
-				CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y);
-			}
-			else if (step.type == MTDrawingStepTypeMove){
-				CGContextMoveToPoint(context, nextPoint.x, nextPoint.y);
-			}
-		}
-
-		if (step.endType == MTDrawingStepDestinationTypeRelative) {
-
-			// calculate next point
-			nextPoint = CGPointMake(step.startPoint.x + (stepLength * step.currentFrame), step.startPoint.y);
-            nextPoint = CGPointRotatedAroundPoint(nextPoint, step.startPoint, step.angle);
-
-			if (step.type == MTDrawingStepTypeDraw) {
-				CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y);
-			}
-			else if (step.type == MTDrawingStepTypeMove){
-				CGContextMoveToPoint(context, nextPoint.x, nextPoint.y);
-			}
-
-		}
+        if (step.type == MTDrawingStepTypeDraw) {
+            CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y);
+        }
+        else if (step.type == MTDrawingStepTypeMove){
+            CGContextMoveToPoint(context, nextPoint.x, nextPoint.y);
+        }
 
 		step.currentPoint = nextPoint;
 
 		step.finished = step.currentFrame == step.totalFrames;
 
 		if (step.finished) {
-			_currentPoint = step.currentPoint;
+			_currentStartPoint = step.currentPoint;
 		}
 		else {
 			step.currentFrame++;
@@ -282,7 +284,7 @@ typedef enum {
 		[NSTimer scheduledTimerWithTimeInterval:(1.0 / _framesPerSecond) target:self selector:@selector(timerTicked) userInfo:nil repeats:NO];
 	}
 	else {
-		if (_completionBlock) _completionBlock();
+		if (_completionBlock) _completionBlock(self);
 	}
 
 }

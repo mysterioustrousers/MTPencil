@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Mysterious Trousers. All rights reserved.
 //
 
-
-typedef void (^MTPencilBlock)();
+@class MTPencil;
+typedef void (^MTPencilBlock)(MTPencil *pencil);
 
 enum {
 	MTPencilAngleUp			= -90,
@@ -24,10 +24,11 @@ typedef CGFloat MTPencilAngle;
 
 // Pencil speed is in points per second (PPS). On a standard resolution a point is a pixel, on a retina display, a point is 2 pixels.
 typedef enum {
+    MTPencilSpeedVerySlow   = 100,
     MTPencilSpeedSlow       = 400,
     MTPencilSpeedMedium     = 600,
     MTPencilSpeedFast       = 800,
-    MTPencilSpeedYES        = 1000
+    MTPencilSpeedVeryFast   = 1000
 } MTPencilSpeed;
 
 
