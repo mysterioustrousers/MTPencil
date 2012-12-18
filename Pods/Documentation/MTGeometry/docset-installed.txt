@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/adamkirk/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.MTGeometry-0.0.2.docset
+Time: 2012-12-17 06:03:49 +0000

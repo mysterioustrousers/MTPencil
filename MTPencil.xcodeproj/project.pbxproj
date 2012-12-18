@@ -1,0 +1,510 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2E8BD62B18E74DAE8BFEC7C9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1AB105429748ED8BD8F4EA /* libPods.a */; };
+		C2496B67167EDAF0007E0246 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2496B66167EDAF0007E0246 /* Default-568h@2x.png */; };
+		C2496B6B167EDB0D007E0246 /* MTPencil.m in Sources */ = {isa = PBXBuildFile; fileRef = C2496B6A167EDB0D007E0246 /* MTPencil.m */; };
+		C2496B6C167EDB52007E0246 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C266AB4F15F526B1001C3DA2 /* MainStoryboard_iPad.storyboard */; };
+		C2496B6D167EDB52007E0246 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C266AB5115F526B1001C3DA2 /* MainStoryboard_iPhone.storyboard */; };
+		C266AAE815F2829D001C3DA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAE715F2829D001C3DA2 /* UIKit.framework */; };
+		C266AAEA15F2829D001C3DA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAE915F2829D001C3DA2 /* Foundation.framework */; };
+		C266AAEC15F2829D001C3DA2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAEB15F2829D001C3DA2 /* CoreGraphics.framework */; };
+		C266AB0915F2829D001C3DA2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AB0815F2829D001C3DA2 /* SenTestingKit.framework */; };
+		C266AB0A15F2829D001C3DA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAE715F2829D001C3DA2 /* UIKit.framework */; };
+		C266AB0B15F2829D001C3DA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAE915F2829D001C3DA2 /* Foundation.framework */; };
+		C266AB3115F52468001C3DA2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAEB15F2829D001C3DA2 /* CoreGraphics.framework */; };
+		C266AB4615F52693001C3DA2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB3B15F52693001C3DA2 /* main.m */; };
+		C266AB4715F52693001C3DA2 /* MTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB3D15F52693001C3DA2 /* MTAppDelegate.m */; };
+		C266AB4A15F52693001C3DA2 /* MTTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB4315F52693001C3DA2 /* MTTestView.m */; };
+		C266AB4B15F52693001C3DA2 /* MTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB4515F52693001C3DA2 /* MTViewController.m */; };
+		C266AB5A15F526D0001C3DA2 /* MTPencilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB5815F526D0001C3DA2 /* MTPencilTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C266AB0C15F2829D001C3DA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C266AADA15F2829D001C3DA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C266AAE215F2829D001C3DA2;
+			remoteInfo = MTShapes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		89AC5FE2561847BC9EC08F82 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		AC1AB105429748ED8BD8F4EA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2496B66167EDAF0007E0246 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C2496B69167EDB0D007E0246 /* MTPencil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTPencil.h; path = MTPencil/MTPencil.h; sourceTree = SOURCE_ROOT; };
+		C2496B6A167EDB0D007E0246 /* MTPencil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTPencil.m; path = MTPencil/MTPencil.m; sourceTree = SOURCE_ROOT; };
+		C266AAE315F2829D001C3DA2 /* MTPencil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTPencil.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C266AAE715F2829D001C3DA2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C266AAE915F2829D001C3DA2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C266AAEB15F2829D001C3DA2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C266AB0715F2829D001C3DA2 /* MTPencilTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTPencilTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C266AB0815F2829D001C3DA2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		C266AB3B15F52693001C3DA2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MTPencil/main.m; sourceTree = SOURCE_ROOT; };
+		C266AB3C15F52693001C3DA2 /* MTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTAppDelegate.h; path = MTPencil/MTAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		C266AB3D15F52693001C3DA2 /* MTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTAppDelegate.m; path = MTPencil/MTAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		C266AB3E15F52693001C3DA2 /* MTPencil-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MTPencil-Info.plist"; path = "MTPencil/MTPencil-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C266AB3F15F52693001C3DA2 /* MTPencil-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MTPencil-Prefix.pch"; path = "MTPencil/MTPencil-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		C266AB4215F52693001C3DA2 /* MTTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTTestView.h; path = MTPencil/MTTestView.h; sourceTree = SOURCE_ROOT; };
+		C266AB4315F52693001C3DA2 /* MTTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTTestView.m; path = MTPencil/MTTestView.m; sourceTree = SOURCE_ROOT; };
+		C266AB4415F52693001C3DA2 /* MTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTViewController.h; path = MTPencil/MTViewController.h; sourceTree = SOURCE_ROOT; };
+		C266AB4515F52693001C3DA2 /* MTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTViewController.m; path = MTPencil/MTViewController.m; sourceTree = SOURCE_ROOT; };
+		C266AB4E15F526B1001C3DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MTPencil/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		C266AB5015F526B1001C3DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = MTPencil/en.lproj/MainStoryboard_iPad.storyboard; sourceTree = SOURCE_ROOT; };
+		C266AB5215F526B1001C3DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = MTPencil/en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = SOURCE_ROOT; };
+		C266AB5615F526D0001C3DA2 /* MTPencilTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MTPencilTests-Info.plist"; path = "MTPencilTests/MTPencilTests-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C266AB5715F526D0001C3DA2 /* MTPencilTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTPencilTests.h; path = MTPencilTests/MTPencilTests.h; sourceTree = SOURCE_ROOT; };
+		C266AB5815F526D0001C3DA2 /* MTPencilTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTPencilTests.m; path = MTPencilTests/MTPencilTests.m; sourceTree = SOURCE_ROOT; };
+		C266AB5D15F527A7001C3DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MTPencilTests/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C266AAE015F2829D001C3DA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C266AAE815F2829D001C3DA2 /* UIKit.framework in Frameworks */,
+				C266AAEA15F2829D001C3DA2 /* Foundation.framework in Frameworks */,
+				C266AAEC15F2829D001C3DA2 /* CoreGraphics.framework in Frameworks */,
+				2E8BD62B18E74DAE8BFEC7C9 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C266AB0315F2829D001C3DA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C266AB3115F52468001C3DA2 /* CoreGraphics.framework in Frameworks */,
+				C266AB0915F2829D001C3DA2 /* SenTestingKit.framework in Frameworks */,
+				C266AB0A15F2829D001C3DA2 /* UIKit.framework in Frameworks */,
+				C266AB0B15F2829D001C3DA2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C2496B54167EA324007E0246 /* MTPencil */ = {
+			isa = PBXGroup;
+			children = (
+				C2496B69167EDB0D007E0246 /* MTPencil.h */,
+				C2496B6A167EDB0D007E0246 /* MTPencil.m */,
+			);
+			name = MTPencil;
+			sourceTree = "<group>";
+		};
+		C266AAD815F2829D001C3DA2 = {
+			isa = PBXGroup;
+			children = (
+				C2496B66167EDAF0007E0246 /* Default-568h@2x.png */,
+				C266AAED15F2829D001C3DA2 /* MTPencil */,
+				C266AB0E15F2829D001C3DA2 /* MTShapesTests */,
+				C266AAE615F2829D001C3DA2 /* Frameworks */,
+				C266AAE415F2829D001C3DA2 /* Products */,
+				89AC5FE2561847BC9EC08F82 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		C266AAE415F2829D001C3DA2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C266AAE315F2829D001C3DA2 /* MTPencil.app */,
+				C266AB0715F2829D001C3DA2 /* MTPencilTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C266AAE615F2829D001C3DA2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C266AAE715F2829D001C3DA2 /* UIKit.framework */,
+				C266AAE915F2829D001C3DA2 /* Foundation.framework */,
+				C266AAEB15F2829D001C3DA2 /* CoreGraphics.framework */,
+				C266AB0815F2829D001C3DA2 /* SenTestingKit.framework */,
+				AC1AB105429748ED8BD8F4EA /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C266AAED15F2829D001C3DA2 /* MTPencil */ = {
+			isa = PBXGroup;
+			children = (
+				C266AB4F15F526B1001C3DA2 /* MainStoryboard_iPad.storyboard */,
+				C266AB5115F526B1001C3DA2 /* MainStoryboard_iPhone.storyboard */,
+				C266AB4415F52693001C3DA2 /* MTViewController.h */,
+				C266AB4515F52693001C3DA2 /* MTViewController.m */,
+				C266AB4215F52693001C3DA2 /* MTTestView.h */,
+				C266AB4315F52693001C3DA2 /* MTTestView.m */,
+				C2496B54167EA324007E0246 /* MTPencil */,
+				C266AAEE15F2829D001C3DA2 /* Supporting Files */,
+			);
+			name = MTPencil;
+			path = MTShapes;
+			sourceTree = "<group>";
+		};
+		C266AAEE15F2829D001C3DA2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C266AB3C15F52693001C3DA2 /* MTAppDelegate.h */,
+				C266AB3D15F52693001C3DA2 /* MTAppDelegate.m */,
+				C266AB3E15F52693001C3DA2 /* MTPencil-Info.plist */,
+				C266AB4D15F526B1001C3DA2 /* InfoPlist.strings */,
+				C266AB3B15F52693001C3DA2 /* main.m */,
+				C266AB3F15F52693001C3DA2 /* MTPencil-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C266AB0E15F2829D001C3DA2 /* MTShapesTests */ = {
+			isa = PBXGroup;
+			children = (
+				C266AB5715F526D0001C3DA2 /* MTPencilTests.h */,
+				C266AB5815F526D0001C3DA2 /* MTPencilTests.m */,
+				C266AB0F15F2829D001C3DA2 /* Supporting Files */,
+			);
+			path = MTShapesTests;
+			sourceTree = "<group>";
+		};
+		C266AB0F15F2829D001C3DA2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C266AB5615F526D0001C3DA2 /* MTPencilTests-Info.plist */,
+				C266AB5C15F527A7001C3DA2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C266AAE215F2829D001C3DA2 /* MTPencil */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C266AB1915F2829D001C3DA2 /* Build configuration list for PBXNativeTarget "MTPencil" */;
+			buildPhases = (
+				C266AADF15F2829D001C3DA2 /* Sources */,
+				C266AAE015F2829D001C3DA2 /* Frameworks */,
+				C266AAE115F2829D001C3DA2 /* Resources */,
+				37D6ABB575554853BAFA365E /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MTPencil;
+			productName = MTShapes;
+			productReference = C266AAE315F2829D001C3DA2 /* MTPencil.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C266AB0615F2829D001C3DA2 /* MTPencilTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C266AB1C15F2829D001C3DA2 /* Build configuration list for PBXNativeTarget "MTPencilTests" */;
+			buildPhases = (
+				C266AB0215F2829D001C3DA2 /* Sources */,
+				C266AB0315F2829D001C3DA2 /* Frameworks */,
+				C266AB0415F2829D001C3DA2 /* Resources */,
+				C266AB0515F2829D001C3DA2 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C266AB0D15F2829D001C3DA2 /* PBXTargetDependency */,
+			);
+			name = MTPencilTests;
+			productName = MTShapesTests;
+			productReference = C266AB0715F2829D001C3DA2 /* MTPencilTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C266AADA15F2829D001C3DA2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MT;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Mysterious Trousers";
+			};
+			buildConfigurationList = C266AADD15F2829D001C3DA2 /* Build configuration list for PBXProject "MTPencil" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C266AAD815F2829D001C3DA2;
+			productRefGroup = C266AAE415F2829D001C3DA2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C266AAE215F2829D001C3DA2 /* MTPencil */,
+				C266AB0615F2829D001C3DA2 /* MTPencilTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C266AAE115F2829D001C3DA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2496B6C167EDB52007E0246 /* MainStoryboard_iPad.storyboard in Resources */,
+				C2496B6D167EDB52007E0246 /* MainStoryboard_iPhone.storyboard in Resources */,
+				C2496B67167EDAF0007E0246 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C266AB0415F2829D001C3DA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		37D6ABB575554853BAFA365E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		C266AB0515F2829D001C3DA2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C266AADF15F2829D001C3DA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C266AB4615F52693001C3DA2 /* main.m in Sources */,
+				C266AB4715F52693001C3DA2 /* MTAppDelegate.m in Sources */,
+				C266AB4A15F52693001C3DA2 /* MTTestView.m in Sources */,
+				C266AB4B15F52693001C3DA2 /* MTViewController.m in Sources */,
+				C2496B6B167EDB0D007E0246 /* MTPencil.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C266AB0215F2829D001C3DA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C266AB5A15F526D0001C3DA2 /* MTPencilTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C266AB0D15F2829D001C3DA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C266AAE215F2829D001C3DA2 /* MTPencil */;
+			targetProxy = C266AB0C15F2829D001C3DA2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C266AB4D15F526B1001C3DA2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C266AB4E15F526B1001C3DA2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C266AB4F15F526B1001C3DA2 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C266AB5015F526B1001C3DA2 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		C266AB5115F526B1001C3DA2 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C266AB5215F526B1001C3DA2 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		C266AB5C15F527A7001C3DA2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C266AB5D15F527A7001C3DA2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C266AB1715F2829D001C3DA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C266AB1815F2829D001C3DA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C266AB1A15F2829D001C3DA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89AC5FE2561847BC9EC08F82 /* Pods.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MTPencil/MTPencil-Prefix.pch";
+				INFOPLIST_FILE = "MTPencil/MTPencil-Info.plist";
+				PRODUCT_NAME = MTPencil;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C266AB1B15F2829D001C3DA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89AC5FE2561847BC9EC08F82 /* Pods.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MTPencil/MTPencil-Prefix.pch";
+				INFOPLIST_FILE = "MTPencil/MTPencil-Info.plist";
+				PRODUCT_NAME = MTPencil;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C266AB1D15F2829D001C3DA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MTPencil.app/MTPencil";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MTPencil/MTPencil-Prefix.pch";
+				INFOPLIST_FILE = "MTPencilTests/MTPencilTests-Info.plist";
+				PRODUCT_NAME = MTPencilTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		C266AB1E15F2829D001C3DA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MTPencil.app/MTPencil";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MTPencil/MTPencil-Prefix.pch";
+				INFOPLIST_FILE = "MTPencilTests/MTPencilTests-Info.plist";
+				PRODUCT_NAME = MTPencilTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C266AADD15F2829D001C3DA2 /* Build configuration list for PBXProject "MTPencil" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C266AB1715F2829D001C3DA2 /* Debug */,
+				C266AB1815F2829D001C3DA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C266AB1915F2829D001C3DA2 /* Build configuration list for PBXNativeTarget "MTPencil" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C266AB1A15F2829D001C3DA2 /* Debug */,
+				C266AB1B15F2829D001C3DA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C266AB1C15F2829D001C3DA2 /* Build configuration list for PBXNativeTarget "MTPencilTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C266AB1D15F2829D001C3DA2 /* Debug */,
+				C266AB1E15F2829D001C3DA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C266AADA15F2829D001C3DA2 /* Project object */;
+}

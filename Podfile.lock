@@ -1,0 +1,11 @@
+
+PODS:
+- MTGeometry (0.0.2)
+
+DEPENDENCIES:
+- MTGeometry
+
+SPEC CHECKSUMS:
+  MTGeometry: ec196504d2f2b4bc95b56229aa84d58322d5a6cb
+
+COCOAPODS: 0.16.0
