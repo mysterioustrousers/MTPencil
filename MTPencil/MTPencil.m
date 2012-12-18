@@ -28,7 +28,7 @@ typedef enum {
 
 
 @interface MTDrawingStep : NSObject
-@property (weak, nonatomic) MTPencil                        *pencil;
+@property (unsafe_unretained) MTPencil                      *pencil;
 @property (nonatomic)       MTDrawingStepType               type;
 @property (nonatomic)       MTDrawingStepDestinationType	endType;
 // Absolute
