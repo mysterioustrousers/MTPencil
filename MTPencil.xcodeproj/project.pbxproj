@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2E8BD62B18E74DAE8BFEC7C9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1AB105429748ED8BD8F4EA /* libPods.a */; };
-		C2496B67167EDAF0007E0246 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2496B66167EDAF0007E0246 /* Default-568h@2x.png */; };
 		C2496B6B167EDB0D007E0246 /* MTPencil.m in Sources */ = {isa = PBXBuildFile; fileRef = C2496B6A167EDB0D007E0246 /* MTPencil.m */; };
 		C2496B6C167EDB52007E0246 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C266AB4F15F526B1001C3DA2 /* MainStoryboard_iPad.storyboard */; };
 		C2496B6D167EDB52007E0246 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C266AB5115F526B1001C3DA2 /* MainStoryboard_iPhone.storyboard */; };
+		C24CD4F41680ECBB004382D2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C24CD4F31680ECBB004382D2 /* Default-568h@2x.png */; };
 		C266AAE815F2829D001C3DA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAE715F2829D001C3DA2 /* UIKit.framework */; };
 		C266AAEA15F2829D001C3DA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAE915F2829D001C3DA2 /* Foundation.framework */; };
 		C266AAEC15F2829D001C3DA2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAEB15F2829D001C3DA2 /* CoreGraphics.framework */; };
@@ -39,9 +39,9 @@
 /* Begin PBXFileReference section */
 		89AC5FE2561847BC9EC08F82 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		AC1AB105429748ED8BD8F4EA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2496B66167EDAF0007E0246 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C2496B69167EDB0D007E0246 /* MTPencil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTPencil.h; path = MTPencil/MTPencil.h; sourceTree = SOURCE_ROOT; };
 		C2496B6A167EDB0D007E0246 /* MTPencil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTPencil.m; path = MTPencil/MTPencil.m; sourceTree = SOURCE_ROOT; };
+		C24CD4F31680ECBB004382D2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		C266AAE315F2829D001C3DA2 /* MTPencil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTPencil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C266AAE715F2829D001C3DA2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C266AAE915F2829D001C3DA2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -95,6 +95,7 @@
 		C2496B54167EA324007E0246 /* MTPencil */ = {
 			isa = PBXGroup;
 			children = (
+				C24CD4F31680ECBB004382D2 /* Default-568h@2x.png */,
 				C2496B69167EDB0D007E0246 /* MTPencil.h */,
 				C2496B6A167EDB0D007E0246 /* MTPencil.m */,
 			);
@@ -104,7 +105,6 @@
 		C266AAD815F2829D001C3DA2 = {
 			isa = PBXGroup;
 			children = (
-				C2496B66167EDAF0007E0246 /* Default-568h@2x.png */,
 				C266AAED15F2829D001C3DA2 /* MTPencil */,
 				C266AB0E15F2829D001C3DA2 /* MTShapesTests */,
 				C266AAE615F2829D001C3DA2 /* Frameworks */,
@@ -257,7 +257,7 @@
 			files = (
 				C2496B6C167EDB52007E0246 /* MainStoryboard_iPad.storyboard in Resources */,
 				C2496B6D167EDB52007E0246 /* MainStoryboard_iPhone.storyboard in Resources */,
-				C2496B67167EDAF0007E0246 /* Default-568h@2x.png in Resources */,
+				C24CD4F41680ECBB004382D2 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

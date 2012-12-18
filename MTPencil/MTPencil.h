@@ -37,9 +37,10 @@ typedef enum {
 
 @interface MTPencil : NSObject
 
+@property (nonatomic) NSUInteger framesPerSecond;
 
-+ (MTPencil *)pencilWithBoundingRect:(CGRect)boundingRect redrawBlock:(MTPencilBlock)redrawBlock;
-- (void)beginWithCompletion:(MTPencilBlock)completion; // call this to begin drawing the shape
+
++ (MTPencil *)pencilDrawingInView:(UIView *)view;
 
 
 #pragma mark - Moving
@@ -50,19 +51,21 @@ typedef enum {
 
 #pragma mark - Drawing
 
-- (void)drawTo:(CGPoint)point duration:(NSTimeInterval)duration;
-- (void)drawAtAngle:(MTPencilAngle)angle distance:(CGFloat)length speed:(MTPencilSpeed)speed;
-- (void)drawToEdgeAtAngle:(MTPencilAngle)angle inset:(CGFloat)inset speed:(MTPencilSpeed)speed;
+- (void)drawTo:(CGPoint)point speed:(MTPencilSpeed)speed;
+- (void)drawAtAngle:(MTPencilAngle)angle distance:(CGFloat)distance speed:(MTPencilSpeed)speed;
+//- (void)drawToEdgeAtAngle:(MTPencilAngle)angle inset:(CGFloat)inset speed:(MTPencilSpeed)speed;
 
 
 #pragma mark - Implement
 
-- (void)updateInContext:(CGContextRef)context; // You MUST call this from within the drawRect: function of the view you want to draw in.
+- (void)beginWithCompletion:(MTPencilBlock)completion; // call this to begin drawing the shape
+- (void)drawInContext:(CGContextRef)context; // You MUST call this from within the drawRect: function of the view you want to draw in.
 
 
 #pragma mark - Helpers
 
-+ (NSInteger)speedForDuration:(NSTimeInterval)duration overDistance:(CGFloat)distance;
++ (MTPencilSpeed)speedForDuration:(NSTimeInterval)duration overDistance:(CGFloat)distance;
++ (NSTimeInterval)durationForSpeed:(MTPencilSpeed)speed overDistance:(CGFloat)distance;
 
 
 @end

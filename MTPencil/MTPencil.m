@@ -9,9 +9,6 @@
 #import "MTPencil.h"
 #import <MTGeometry.h>
 
-#define FPS			60.0
-#define INTERVAL	(1.0 / FPS)
-
 
 
 typedef enum {
@@ -20,9 +17,9 @@ typedef enum {
 } MTDrawingStepType;
 
 typedef enum {
-	MTDrawingStepEndTypeAbsolute,
-	MTDrawingStepEndTypeRelative
-} MTDrawingStepEndType;
+	MTDrawingStepDestinationTypeAbsolute,
+    MTDrawingStepDestinationTypeRelative
+} MTDrawingStepDestinationType;
 
 
 
@@ -31,22 +28,23 @@ typedef enum {
 
 
 @interface MTDrawingStep : NSObject
-@property (nonatomic)	MTDrawingStepType			type;
-@property (nonatomic)	MTDrawingStepEndType		endType;
+@property (weak, nonatomic) MTPencil                        *pencil;
+@property (nonatomic)       MTDrawingStepType               type;
+@property (nonatomic)       MTDrawingStepDestinationType	endType;
 // Absolute
-@property (nonatomic)	CGPoint						endPoint;
+@property (nonatomic)       CGPoint                         endPoint;
 // Relative
-@property (nonatomic)	CGFloat						angle;
-@property (nonatomic)	CGFloat						length;
-@property (nonatomic)	CGFloat						inset;			// currently only used for drawing to edge
+@property (nonatomic)       CGFloat                         angle;
+@property (nonatomic)       CGFloat                         length;
+@property (nonatomic)       CGFloat                         inset;			// currently only used for drawing to edge
 // Animation (set at draw time)
-@property (nonatomic)	CGPoint						startPoint;
-@property (nonatomic)	CGPoint						currentPoint;
-@property (nonatomic)	NSUInteger					currentFrame;
-@property (nonatomic)	NSUInteger					totalFrames;
-@property (nonatomic)	BOOL						finished;
-@property (nonatomic)	NSTimeInterval				duration;
-@property (strong)		MTPencilBlock				completion;
+@property (nonatomic)       CGPoint                         startPoint;
+@property (nonatomic)       CGPoint                         currentPoint;
+@property (nonatomic)       NSUInteger                      currentFrame;
+@property (nonatomic)       NSUInteger                      totalFrames;
+@property (nonatomic)       BOOL                            finished;
+@property (nonatomic)       MTPencilSpeed                   speed;
+@property (strong)          MTPencilBlock                   completion;
 @end
 
 
@@ -59,7 +57,7 @@ typedef enum {
     self = [super init];
     if (self) {
 		_type					= MTDrawingStepTypeMove;
-		_endType				= MTDrawingStepEndTypeAbsolute;
+		_endType				= MTDrawingStepDestinationTypeAbsolute;
 
 		_endPoint				= CGPointZero;
 
@@ -72,24 +70,20 @@ typedef enum {
 		_currentFrame			= 1;
 		_totalFrames			= 1;
 		_finished				= NO;
-		_duration				= 0;
+		_speed                  = 0;
 		_completion				= nil;
     }
     return self;
-}
-
-- (void)setDuration:(NSTimeInterval)duration
-{
-	_duration		= duration;
-	_totalFrames	= round(duration * FPS);
 }
 
 - (void)setStartPoint:(CGPoint)startPoint
 {
 	_startPoint		= startPoint;
 	_currentPoint	= startPoint;
-	if (_endType == MTDrawingStepEndTypeAbsolute) {
+	if (_endType == MTDrawingStepDestinationTypeAbsolute) {
 		_length = CGPointDistance(startPoint, _endPoint);
+        NSTimeInterval duration = [MTPencil durationForSpeed:_speed overDistance:_length];
+        _totalFrames = duration / _pencil.framesPerSecond;
 	}
 }
 
@@ -113,8 +107,7 @@ typedef enum {
 
 
 @interface MTPencil ()
-@property (nonatomic)			CGRect				boundingRect;
-@property (nonatomic, strong)	MTPencilBlock		redrawBlock;
+@property (strong, nonatomic)   UIView              *view;
 @property (strong, nonatomic)	NSMutableArray		*steps;
 @property (nonatomic)			CGPoint				currentPoint;
 @property (nonatomic)			dispatch_queue_t	queue;
@@ -127,27 +120,27 @@ typedef enum {
 @implementation MTPencil
 
 
-- (id)initWithBoundingRect:(CGRect)boundingRect redrawBlock:(MTPencilBlock)redrawBlock
+- (id)initDrawingView:(UIView *)view
 {
     self = [super init];
     if (self) {
-		_boundingRect		= boundingRect;
+        _view               = view;
 		_steps				= [NSMutableArray array];
-        _redrawBlock		= redrawBlock;
 		_completionBlock	= nil;
+        _framesPerSecond    = 60.0;
     }
     return self;
 }
 
-+ (MTPencil *)pencilWithBoundingRect:(CGRect)boundingRect redrawBlock:(MTPencilBlock)redrawBlock
++ (MTPencil *)pencilDrawingInView:(UIView *)view
 {
-	return [[MTPencil alloc] initWithBoundingRect:boundingRect redrawBlock:redrawBlock];
+	return [[MTPencil alloc] initDrawingView:view];
 }
 
 - (void)beginWithCompletion:(MTPencilBlock)completion
 {
 	_completionBlock = completion;
-	_redrawBlock();
+    [_view setNeedsDisplay];
 }
 
 
@@ -158,8 +151,9 @@ typedef enum {
 - (void)moveTo:(CGPoint)point
 {
 	MTDrawingStep *step = [[MTDrawingStep alloc] init];
+    step.pencil         = self;
 	step.type			= MTDrawingStepTypeMove;
-	step.endType		= MTDrawingStepEndTypeAbsolute;
+	step.endType		= MTDrawingStepDestinationTypeAbsolute;
 	step.endPoint		= point;
 	[_steps addObject:step];
 }
@@ -167,8 +161,9 @@ typedef enum {
 - (void)moveAtAngle:(CGFloat)angle distance:(CGFloat)distance;
 {
 	MTDrawingStep *step	= [[MTDrawingStep alloc] init];
+    step.pencil     = self;
 	step.type		= MTDrawingStepTypeMove;
-	step.endType	= MTDrawingStepEndTypeRelative;
+	step.endType	= MTDrawingStepDestinationTypeRelative;
 	step.angle		= angle;
 	step.length		= distance;
 	[_steps addObject:step];
@@ -181,36 +176,39 @@ typedef enum {
 
 #pragma mark Drawing
 
-- (void)drawTo:(CGPoint)point duration:(NSTimeInterval)duration
+- (void)drawTo:(CGPoint)point speed:(MTPencilSpeed)speed
 {
 	MTDrawingStep *step	= [[MTDrawingStep alloc] init];
+    step.pencil     = self;
 	step.type		= MTDrawingStepTypeDraw;
-	step.endType	= MTDrawingStepEndTypeAbsolute;
+	step.endType	= MTDrawingStepDestinationTypeAbsolute;
 	step.endPoint	= point;
-	step.duration	= duration;
+	step.speed      = speed;
 	[_steps addObject:step];
 }
 
-- (void)drawAtAngle:(MTPencilAngle)angle distance:(CGFloat)length speed:(MTPencilSpeed)speed
+- (void)drawAtAngle:(MTPencilAngle)angle distance:(CGFloat)distance speed:(MTPencilSpeed)speed
 {
 	MTDrawingStep *step	= [[MTDrawingStep alloc] init];
+    step.pencil     = self;
 	step.type		= MTDrawingStepTypeDraw;
-	step.endType	= MTDrawingStepEndTypeRelative;
+	step.endType	= MTDrawingStepDestinationTypeRelative;
 	step.angle		= angle;
-	step.length		= length;
-	step.duration	= speed;
+	step.length		= distance;
+	step.speed      = speed;
 	[_steps addObject:step];
 }
 
 - (void)drawToEdgeAtAngle:(MTPencilAngle)angle inset:(CGFloat)inset speed:(MTPencilSpeed)speed
 {
 	MTDrawingStep *step	= [[MTDrawingStep alloc] init];
+    step.pencil     = self;
 	step.type		= MTDrawingStepTypeDraw;
-	step.endType	= MTDrawingStepEndTypeRelative;
+	step.endType	= MTDrawingStepDestinationTypeRelative;
 	step.angle		= angle;
 	step.length		= INFINITY;
 	step.inset		= inset;
-	step.duration	= speed;
+	step.speed      = speed;
 	[_steps addObject:step];
 }
 
@@ -218,8 +216,10 @@ typedef enum {
 
 
 
-- (void)updateInContext:(CGContextRef)context
+- (void)drawInContext:(CGContextRef)context
 {
+//    CGContextRef context = UIGraphicsGetCurrentContext(); // Won't work on Mac, need to switch to NSBezierPath
+
 	CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
 
 	for (MTDrawingStep *step in _steps) {
@@ -227,10 +227,15 @@ typedef enum {
 		step.startPoint = _currentPoint;
 		CGContextMoveToPoint(context, step.startPoint.x, step.startPoint.y);
 
+        if (step.currentFrame == 0) {
+//            step calculateEndPoint
+        }
+
 		CGFloat stepLength	= step.length / step.totalFrames;
+        
 		CGPoint nextPoint;
 
-		if (step.endType == MTDrawingStepEndTypeAbsolute) {
+		if (step.endType == MTDrawingStepDestinationTypeAbsolute) {
 
             nextPoint = CGPointAlongLine(CGLineMake(step.startPoint, step.endPoint), (stepLength * step.currentFrame));
 
@@ -242,7 +247,7 @@ typedef enum {
 			}
 		}
 
-		if (step.endType == MTDrawingStepEndTypeRelative) {
+		if (step.endType == MTDrawingStepDestinationTypeRelative) {
 
 			// calculate next point
 			nextPoint = CGPointMake(step.startPoint.x + (stepLength * step.currentFrame), step.startPoint.y);
@@ -274,7 +279,7 @@ typedef enum {
 
 	MTDrawingStep *lastStep = _steps.lastObject;
 	if (lastStep && !lastStep.finished) {
-		[NSTimer scheduledTimerWithTimeInterval:INTERVAL target:self selector:@selector(timerTicked) userInfo:nil repeats:NO];
+		[NSTimer scheduledTimerWithTimeInterval:(1.0 / _framesPerSecond) target:self selector:@selector(timerTicked) userInfo:nil repeats:NO];
 	}
 	else {
 		if (_completionBlock) _completionBlock();
@@ -287,9 +292,14 @@ typedef enum {
 
 #pragma mark Helpers
 
-+ (NSInteger)speedForDuration:(NSTimeInterval)duration overDistance:(CGFloat)distance
++ (MTPencilSpeed)speedForDuration:(NSTimeInterval)duration overDistance:(CGFloat)distance
 {
     return distance / duration;
+}
+
++ (NSTimeInterval)durationForSpeed:(MTPencilSpeed)speed overDistance:(CGFloat)distance
+{
+    return distance / speed;
 }
 
 
@@ -299,7 +309,7 @@ typedef enum {
 
 - (void)timerTicked
 {
-	_redrawBlock();
+	[_view setNeedsDisplay];
 }
 
 

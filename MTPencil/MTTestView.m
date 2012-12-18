@@ -30,9 +30,7 @@
 
 - (void)draw
 {
-	_pencil = [MTPencil pencilWithBoundingRect:self.frame redrawBlock:^{
-		[self setNeedsDisplay];
-	}];
+	_pencil = [MTPencil pencilDrawingInView:self];
 	[_pencil moveTo:CGPointMake(100, 100)];
 	[_pencil drawAtAngle:MTPencilAngleUpRight	distance:20     speed:PPS];
 	[_pencil drawAtAngle:MTPencilAngleUp		distance:50     speed:PPS];
@@ -48,7 +46,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-	[_pencil updateInContext:UIGraphicsGetCurrentContext()];
+	[_pencil drawInContext:UIGraphicsGetCurrentContext()];
 }
 
 
