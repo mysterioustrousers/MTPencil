@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.license      = 'BSD'
   s.author       = { "Adam Kirk" => "atomkirk@gmail.com" }
   s.source       = { :git => "https://github.com/mysterioustrousers/MTPencil.git", :tag => "0.0.1" }
-  s.platform     = :ios
+  s.platform     = :ios, '5.0'
   s.source_files = 'MTPencil/MTPencil.{h,m}'
   s.framework  = 'CoreGraphics'
   s.requires_arc = true

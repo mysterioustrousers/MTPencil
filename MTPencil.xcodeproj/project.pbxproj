@@ -423,6 +423,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTPencil/MTPencil-Prefix.pch";
 				INFOPLIST_FILE = "MTPencil/MTPencil-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = MTPencil;
 				WRAPPER_EXTENSION = app;
 			};
@@ -435,6 +436,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTPencil/MTPencil-Prefix.pch";
 				INFOPLIST_FILE = "MTPencil/MTPencil-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = MTPencil;
 				WRAPPER_EXTENSION = app;
 			};
