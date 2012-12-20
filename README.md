@@ -43,12 +43,12 @@ Here we create a pencil object, telling it what view to draw in. Then, we define
 	
 	- (void)drawRect:(CGRect)rect
 	{
-		[_pencil draw];
+		[_pencil animate];
 	}
 	
 	@end
 
-NOTE: You must tell the pencil to draw in the drawRect: method of your view.
+NOTE: You must call `animate` on the pencil in your view's drawRect:
 
 ### Options
 
