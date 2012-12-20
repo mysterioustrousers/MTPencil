@@ -46,7 +46,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-	[_pencil draw];
+	[_pencil animate];
 }
 
 
