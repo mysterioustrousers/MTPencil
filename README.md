@@ -2,6 +2,7 @@ MTPencil
 ========
 
 A library for animated line drawing (like an invisible pencil). Allows you to declare a series of drawing steps, set the speed (points per second) and then tell it to start drawing.
+I'm just getting started on this library so it's very basic right now. More awesomeness to come.
 
 ### Installation
 

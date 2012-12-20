@@ -59,11 +59,11 @@ typedef enum {
 
 #pragma mark - Implement
 
-- (void)beginWithCompletion:(MTPencilBlock)completion; // call this to begin drawing the shape
-
  // You MUST call one of these from within the drawRect: function of the view you want to draw in.
 - (void)animate;                                          // Can be used for iOS but no Mac OS
 - (void)animateInGraphicsContext:(CGContextRef)context;   // Can be used if you want to customize the graphics context
+
+- (void)beginWithCompletion:(MTPencilBlock)completion; // call this to begin drawing the shape
 
 
 #pragma mark - Helpers
