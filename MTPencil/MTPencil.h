@@ -6,70 +6,44 @@
 //  Copyright (c) 2012 Mysterious Trousers. All rights reserved.
 //
 
-@class MTPencil;
-typedef void (^MTPencilBlock)(MTPencil *pencil);
-
-enum {
-	MTPencilAngleUp			= -90,
-	MTPencilAngleDown		= 90,
-	MTPencilAngleLeft		= 180,
-	MTPencilAngleRight		= 0,
-	MTPencilAngleUpRight	= -45,
-	MTPencilAngleUpLeft		= -135,
-	MTPencilAngleDownRight	= 45,
-	MTPencilAngleDownLeft	= 135
-};
-typedef CGFloat MTPencilAngle;
-
-
-// Pencil speed is in points per second (PPS). On a standard resolution a point is a pixel, on a retina display, a point is 2 pixels.
-typedef enum {
-    MTPencilSpeedVerySlow   = 100,
-    MTPencilSpeedSlow       = 400,
-    MTPencilSpeedMedium     = 600,
-    MTPencilSpeedFast       = 800,
-    MTPencilSpeedVeryFast   = 1000
-} MTPencilSpeed;
-
-
-
-
+#import "MTPencilStep.h"
 
 
 @interface MTPencil : NSObject
 
-@property (nonatomic) NSUInteger    framesPerSecond;
+@property (nonatomic, strong) NSMutableArray *steps;
+@property (nonatomic, assign) BOOL           drawsAsynchronously;
+@property (nonatomic, copy) void           (^completion)(MTPencil *pencil);
+@property (nonatomic, copy) void           (^eraseCompletion)(MTPencil *pencil);
+@property (nonatomic, assign) BOOL           isDrawing;
+@property (nonatomic, assign) BOOL           isDrawn;
+@property (nonatomic, assign) BOOL           isErasing;
+@property (nonatomic, assign) BOOL           isErased;
+@property (nonatomic, assign) BOOL           isCancelled;
 
 
-+ (MTPencil *)pencilDrawingInView:(UIView *)view;
++ (MTPencil *)pencilWithView:(UIView *)view;
+
+- (void)beginWithCompletion:(void (^)(MTPencil *pencil))completion;
+
+- (void)eraseWithCompletion:(void (^)(MTPencil *pencil))completion;
+
+- (CGPathRef)fullPath;
+
+- (void)erase;
+
+- (void)reset;
+
+- (void)cancel;
+
+- (void)complete;
 
 
-#pragma mark - Moving
+#pragma mark - Add Steps
 
-- (void)moveTo:(CGPoint)point;
-- (void)moveAtAngle:(MTPencilAngle)angle distance:(CGFloat)distance;
+- (MTPencilStep *)move;
 
-
-#pragma mark - Drawing
-
-- (void)drawTo:(CGPoint)point speed:(MTPencilSpeed)speed;
-- (void)drawAtAngle:(MTPencilAngle)angle distance:(CGFloat)distance speed:(MTPencilSpeed)speed;
-//- (void)drawToEdgeAtAngle:(MTPencilAngle)angle inset:(CGFloat)inset speed:(MTPencilSpeed)speed;
-
-
-#pragma mark - Implement
-
- // You MUST call one of these from within the drawRect: function of the view you want to draw in.
-- (void)animate;                                          // Can be used for iOS but no Mac OS
-- (void)animateInGraphicsContext:(CGContextRef)context;   // Can be used if you want to customize the graphics context
-
-- (void)beginWithCompletion:(MTPencilBlock)completion; // call this to begin drawing the shape
-
-
-#pragma mark - Helpers
-
-+ (MTPencilSpeed)speedForDuration:(NSTimeInterval)duration overDistance:(CGFloat)distance;
-+ (NSTimeInterval)durationForSpeed:(MTPencilSpeed)speed overDistance:(CGFloat)distance;
+- (MTPencilStep *)draw;
 
 
 @end

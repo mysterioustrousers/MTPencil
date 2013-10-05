@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E8BD62B18E74DAE8BFEC7C9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1AB105429748ED8BD8F4EA /* libPods.a */; };
+		C206CFEF17F0E94100BFE527 /* MTPencilStep.m in Sources */ = {isa = PBXBuildFile; fileRef = C206CFEE17F0E94100BFE527 /* MTPencilStep.m */; };
 		C2496B6B167EDB0D007E0246 /* MTPencil.m in Sources */ = {isa = PBXBuildFile; fileRef = C2496B6A167EDB0D007E0246 /* MTPencil.m */; };
 		C2496B6C167EDB52007E0246 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C266AB4F15F526B1001C3DA2 /* MainStoryboard_iPad.storyboard */; };
 		C2496B6D167EDB52007E0246 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C266AB5115F526B1001C3DA2 /* MainStoryboard_iPhone.storyboard */; };
@@ -24,6 +25,8 @@
 		C266AB4A15F52693001C3DA2 /* MTTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB4315F52693001C3DA2 /* MTTestView.m */; };
 		C266AB4B15F52693001C3DA2 /* MTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB4515F52693001C3DA2 /* MTViewController.m */; };
 		C266AB5A15F526D0001C3DA2 /* MTPencilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB5815F526D0001C3DA2 /* MTPencilTests.m */; };
+		C2F27D8A17F21316004539A1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2F27D8917F21316004539A1 /* Images.xcassets */; };
+		C2F27D8C17F2132F004539A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F27D8B17F2132F004539A1 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +42,10 @@
 /* Begin PBXFileReference section */
 		89AC5FE2561847BC9EC08F82 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		AC1AB105429748ED8BD8F4EA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2496B69167EDB0D007E0246 /* MTPencil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTPencil.h; path = MTPencil/MTPencil.h; sourceTree = SOURCE_ROOT; };
+		C206CFED17F0E94100BFE527 /* MTPencilStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTPencilStep.h; path = MTPencil/MTPencilStep.h; sourceTree = SOURCE_ROOT; };
+		C206CFEE17F0E94100BFE527 /* MTPencilStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTPencilStep.m; path = MTPencil/MTPencilStep.m; sourceTree = SOURCE_ROOT; };
+		C24250ED17F117DA00B6142F /* MTPencilStep_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTPencilStep_Private.h; path = MTPencil/MTPencilStep_Private.h; sourceTree = SOURCE_ROOT; };
+		C2496B69167EDB0D007E0246 /* MTPencil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = MTPencil.h; path = MTPencil/MTPencil.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C2496B6A167EDB0D007E0246 /* MTPencil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTPencil.m; path = MTPencil/MTPencil.m; sourceTree = SOURCE_ROOT; };
 		C24CD4F31680ECBB004382D2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		C266AAE315F2829D001C3DA2 /* MTPencil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTPencil.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +70,8 @@
 		C266AB5715F526D0001C3DA2 /* MTPencilTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTPencilTests.h; path = MTPencilTests/MTPencilTests.h; sourceTree = SOURCE_ROOT; };
 		C266AB5815F526D0001C3DA2 /* MTPencilTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTPencilTests.m; path = MTPencilTests/MTPencilTests.m; sourceTree = SOURCE_ROOT; };
 		C266AB5D15F527A7001C3DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MTPencilTests/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		C2F27D8917F21316004539A1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MTPencil/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		C2F27D8B17F2132F004539A1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F27D8C17F2132F004539A1 /* QuartzCore.framework in Frameworks */,
 				C266AAE815F2829D001C3DA2 /* UIKit.framework in Frameworks */,
 				C266AAEA15F2829D001C3DA2 /* Foundation.framework in Frameworks */,
 				C266AAEC15F2829D001C3DA2 /* CoreGraphics.framework in Frameworks */,
@@ -97,6 +106,9 @@
 			children = (
 				C2496B69167EDB0D007E0246 /* MTPencil.h */,
 				C2496B6A167EDB0D007E0246 /* MTPencil.m */,
+				C206CFED17F0E94100BFE527 /* MTPencilStep.h */,
+				C206CFEE17F0E94100BFE527 /* MTPencilStep.m */,
+				C24250ED17F117DA00B6142F /* MTPencilStep_Private.h */,
 			);
 			name = MTPencil;
 			sourceTree = "<group>";
@@ -124,6 +136,7 @@
 		C266AAE615F2829D001C3DA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C2F27D8B17F2132F004539A1 /* QuartzCore.framework */,
 				C266AAE715F2829D001C3DA2 /* UIKit.framework */,
 				C266AAE915F2829D001C3DA2 /* Foundation.framework */,
 				C266AAEB15F2829D001C3DA2 /* CoreGraphics.framework */,
@@ -143,6 +156,7 @@
 				C266AB4215F52693001C3DA2 /* MTTestView.h */,
 				C266AB4315F52693001C3DA2 /* MTTestView.m */,
 				C2496B54167EA324007E0246 /* MTPencil */,
+				C2F27D8917F21316004539A1 /* Images.xcassets */,
 				C266AAEE15F2829D001C3DA2 /* Supporting Files */,
 			);
 			name = MTPencil;
@@ -229,7 +243,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MT;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Mysterious Trousers";
 			};
 			buildConfigurationList = C266AADD15F2829D001C3DA2 /* Build configuration list for PBXProject "MTPencil" */;
@@ -256,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2496B6C167EDB52007E0246 /* MainStoryboard_iPad.storyboard in Resources */,
+				C2F27D8A17F21316004539A1 /* Images.xcassets in Resources */,
 				C2496B6D167EDB52007E0246 /* MainStoryboard_iPhone.storyboard in Resources */,
 				C24CD4F41680ECBB004382D2 /* Default-568h@2x.png in Resources */,
 			);
@@ -305,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C206CFEF17F0E94100BFE527 /* MTPencilStep.m in Sources */,
 				C266AB4615F52693001C3DA2 /* main.m in Sources */,
 				C266AB4715F52693001C3DA2 /* MTAppDelegate.m in Sources */,
 				C266AB4A15F52693001C3DA2 /* MTTestView.m in Sources */,
@@ -389,6 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -420,10 +437,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89AC5FE2561847BC9EC08F82 /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTPencil/MTPencil-Prefix.pch";
 				INFOPLIST_FILE = "MTPencil/MTPencil-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = MTPencil;
 				WRAPPER_EXTENSION = app;
 			};
@@ -433,10 +452,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89AC5FE2561847BC9EC08F82 /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MTPencil/MTPencil-Prefix.pch";
 				INFOPLIST_FILE = "MTPencil/MTPencil-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = MTPencil;
 				WRAPPER_EXTENSION = app;
 			};

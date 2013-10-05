@@ -30,14 +30,15 @@ Here we create a pencil object, telling it what view to draw in. Then, we define
 		
 		_pencil = [MTPencil pencilDrawingInView:self];
 		
-		[_pencil moveTo:CGPointMake(100, 100)];
-		[_pencil drawAtAngle:MTPencilAngleUpRight	distance:20     speed:speed];
-		[_pencil drawAtAngle:MTPencilAngleUp		distance:50     speed:speed];
-		[_pencil drawAtAngle:MTPencilAngleRight		distance:100	speed:speed];
-		[_pencil drawAtAngle:MTPencilAngleDown		distance:200	speed:speed];
-		[_pencil drawAtAngle:MTPencilAngleLeft		distance:100	speed:speed];
-		[_pencil drawAtAngle:MTPencilAngleUp		distance:123	speed:speed];
-		[_pencil drawAtAngle:MTPencilAngleUpLeft	distance:20     speed:speed];
+		[[_pencil move] to:CGPointMake(100, 100)];
+		[[[_pencil stroke] angle:MTPencilStepAngleUpRight  distance:20]    speed:speed];
+		[[[_pencil stroke] angle:MTPencilStepAngleUp       distance:50]    speed:speed];
+		[[[_pencil stroke] angle:MTPencilStepAngleRight	distance:100]	speed:speed];
+		[[[_pencil stroke] angle:MTPencilStepAngleDown		distance:200]	speed:speed];
+		[[[_pencil stroke] angle:MTPencilStepAngleLeft		distance:100]	speed:speed];
+		[[[_pencil stroke] angle:MTPencilStepAngleUp       distance:123]	speed:speed];
+		[[[_pencil stroke] angle:MTPencilStepAngleUpLeft   distance:20]    speed:speed];
+		[[[_pencil stroke] to:CGPointMake(200, 200)]                        speed:speed];
 		[_pencil beginWithCompletion:^(MTPencil *pencil) {
 	    }];
 	}
@@ -59,7 +60,7 @@ You can tell the pencil to draw at any degree (ie 143), but here are some predef
 	MTPencilAngleDown		= 90
 	MTPencilAngleLeft		= 180
 	MTPencilAngleRight		= 0
-	MTPencilAngleUpRight	= -45
+	MTPencilAngleUpRight		= -45
 	MTPencilAngleUpLeft		= -135
 	MTPencilAngleDownRight	= 45
 	MTPencilAngleDownLeft	= 135

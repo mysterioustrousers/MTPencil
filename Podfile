@@ -1,3 +1,3 @@
 platform :ios
 
-pod 'MTGeometry'
+pod 'MTGeometry', path: "libs/MTGeometry"

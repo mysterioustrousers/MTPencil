@@ -1,0 +1,3 @@
+[submodule "libs/MTGeometry"]
+	path = libs/MTGeometry
+	url = https://github.com/mysterioustrousers/MTGeometry.git

@@ -15,7 +15,7 @@
 
 
 @interface MTTestView ()
-@property (strong) MTPencil *pencil;
+@property (nonatomic, strong) MTPencil *pencil;
 @end
 
 
@@ -26,27 +26,22 @@
 
 - (void)draw
 {
-    MTPencilSpeed speed = MTPencilSpeedVerySlow;
+    MTPencilStepSpeed speed = 100;
 
-	_pencil = [MTPencil pencilDrawingInView:self];
+	_pencil = [MTPencil pencilWithView:self];
 
-	[_pencil moveTo:CGPointMake(100, 100)];
-	[_pencil drawAtAngle:MTPencilAngleUpRight	distance:20     speed:speed];
-	[_pencil drawAtAngle:MTPencilAngleUp		distance:50     speed:speed];
-	[_pencil drawAtAngle:MTPencilAngleRight		distance:100	speed:speed];
-	[_pencil drawAtAngle:MTPencilAngleDown		distance:200	speed:speed];
-	[_pencil drawAtAngle:MTPencilAngleLeft		distance:100	speed:speed];
-	[_pencil drawAtAngle:MTPencilAngleUp		distance:123	speed:speed];
-	[_pencil drawAtAngle:MTPencilAngleUpLeft	distance:20     speed:speed];
-    [_pencil drawTo:CGPointMake(200, 200) speed:speed];
+	[[_pencil move] to:CGPointMake(100, 100)];
+	[[[_pencil draw] angle:MTPencilStepAngleUpRight distance:20]    speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleUp      distance:50]    speed:10];
+	[[[_pencil draw] angle:MTPencilStepAngleRight   distance:100]	speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleDown    distance:200]	speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleLeft	distance:100]	speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleUp      distance:123]	speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleUpLeft  distance:20]    speed:speed];
+    [[[_pencil draw] to:CGPointMake(200, 200)]                      speed:speed];
 	[_pencil beginWithCompletion:^(MTPencil *pencil) {
 
     }];
-}
-
-- (void)drawRect:(CGRect)rect
-{
-	[_pencil animate];
 }
 
 

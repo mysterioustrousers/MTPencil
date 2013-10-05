@@ -7,319 +7,241 @@
 //
 
 #import "MTPencil.h"
-#import <MTGeometry.h>
+#import "MTPencilStep.h"
+#import "MTPencilStep_Private.h"
 
 
-
-typedef enum {
-	MTDrawingStepTypeMove,
-	MTDrawingStepTypeDraw
-} MTDrawingStepType;
-
-typedef enum {
-	MTDrawingStepDestinationTypeAbsolute,
-    MTDrawingStepDestinationTypeRelative
-} MTDrawingStepDestinationType;
-
-
-
-
-
-
-
-@interface MTDrawingStep : NSObject
-@property (unsafe_unretained) MTPencil                      *pencil;
-@property (nonatomic)       MTDrawingStepType               type;
-@property (nonatomic)       MTDrawingStepDestinationType	endType;
-// Absolute
-@property (nonatomic)       CGPoint                         endPoint;
-// Relative
-@property (nonatomic)       CGFloat                         angle;
-@property (nonatomic)       CGFloat                         length;
-@property (nonatomic)       CGFloat                         inset;			// currently only used for drawing to edge
-// Animation (set at draw time)
-@property (nonatomic)       CGPoint                         startPoint;
-@property (nonatomic)       CGPoint                         currentPoint;
-@property (nonatomic)       NSUInteger                      currentFrame;
-@property (nonatomic)       NSUInteger                      totalFrames;
-@property (nonatomic)       BOOL                            finished;
-@property (nonatomic)       MTPencilSpeed                   speed;
-@property (strong)          MTPencilBlock                   completion;
+@interface MTPencil () <MTPencilStepDelegate>
 @end
 
 
-
-
-@implementation MTDrawingStep
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-		_type					= MTDrawingStepTypeMove;
-		_endType				= MTDrawingStepDestinationTypeAbsolute;
-
-		_endPoint				= CGPointZero;
-
-		_angle					= 0;
-		_length					= 0;
-		_inset					= 0;
-		
-		_startPoint				= CGPointZero;
-		_currentPoint			= CGPointZero;
-		_currentFrame			= 1;
-		_totalFrames			= 1;
-		_finished				= NO;
-		_speed                  = 0;
-		_completion				= nil;
-    }
-    return self;
+@implementation MTPencil {
+    UIView  *_view;
+    CGPoint _currentStartPoint;
+    BOOL    _shouldAnimate;
 }
 
-- (void)setStartPoint:(CGPoint)startPoint
-{
-	_startPoint		= startPoint;
-	_currentPoint	= startPoint;
-	if (_endType == MTDrawingStepDestinationTypeAbsolute) {
-		_length = CGPointDistance(startPoint, _endPoint);
-        if (_type == MTDrawingStepTypeDraw) {
-            NSTimeInterval duration = [MTPencil durationForSpeed:_speed overDistance:_length];
-            _totalFrames = duration * _pencil.framesPerSecond;
-        }
-	}
-}
-
-- (void)setEndPoint:(CGPoint)endPoint
-{
-    _endPoint = endPoint;
-    if (_endType == MTDrawingStepDestinationTypeRelative) {
-        _length = CGPointDistance(_startPoint, endPoint);
-        if (_type == MTDrawingStepTypeDraw) {
-            NSTimeInterval duration = [MTPencil durationForSpeed:_speed overDistance:_length];
-            _totalFrames = duration * _pencil.framesPerSecond;
-        }
-    }
-}
-
-@end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@interface MTPencil ()
-@property (strong, nonatomic)   UIView              *view;
-@property (strong, nonatomic)	NSMutableArray		*steps;
-@property (nonatomic)			CGPoint				currentStartPoint;
-@property (nonatomic)			dispatch_queue_t	queue;
-@property (nonatomic, strong)	MTPencilBlock		completionBlock;
-@end
-
-
-
-
-@implementation MTPencil
-
-
-- (id)initDrawingView:(UIView *)view
+- (id)initWithView:(UIView *)view
 {
     self = [super init];
     if (self) {
         _view               = view;
-		_steps				= [NSMutableArray array];
-		_completionBlock	= nil;
-        _framesPerSecond    = 60.0;
+        _steps              = [NSMutableArray array];
+        _completion         = nil;
+        _eraseCompletion    = nil;
+        _isDrawing          = NO;
+        _isDrawn            = NO;
         _currentStartPoint  = CGPointZero;
+        _shouldAnimate      = YES;
+        _isCancelled        = NO;
+        _isErased           = NO;
     }
     return self;
 }
 
-+ (MTPencil *)pencilDrawingInView:(UIView *)view
+
+
+
+#pragma mark - Public
+
++ (MTPencil *)pencilWithView:(UIView *)view
 {
-	return [[MTPencil alloc] initDrawingView:view];
+	return [[MTPencil alloc] initWithView:view];
 }
 
-- (void)beginWithCompletion:(MTPencilBlock)completion
+- (void)beginWithCompletion:(void (^)(MTPencil *pencil))completion
 {
-	_completionBlock = completion;
-    [_view setNeedsDisplay];
+    _shouldAnimate    = YES;
+    self.completion = completion;
+    [self beginDrawing];
 }
 
-
-
-
-
-
-
-#pragma mark Moving
-
-- (void)moveTo:(CGPoint)point
+- (void)eraseWithCompletion:(void (^)(MTPencil *pencil))completion
 {
-	MTDrawingStep *step = [[MTDrawingStep alloc] init];
-    step.pencil         = self;
-	step.type			= MTDrawingStepTypeMove;
-	step.endType		= MTDrawingStepDestinationTypeAbsolute;
-	step.endPoint		= point;
-	[_steps addObject:step];
+    if (self.isDrawing || self.isErasing || !self.isDrawn) {
+        if (completion) completion(self);
+        return;
+    }
+
+    self.isDrawing          = NO;
+    self.isErasing          = YES;
+    self.eraseCompletion    = completion;
+    self.isCancelled        = NO;
+    _shouldAnimate          = YES;
+
+    MTPencilStep *lastStep = [self.steps lastObject];
+    if (lastStep) {
+        [lastStep eraseWithCompletion:nil];
+    }
 }
 
-- (void)moveAtAngle:(CGFloat)angle distance:(CGFloat)distance;
+- (CGPathRef)fullPath
 {
-	MTDrawingStep *step	= [[MTDrawingStep alloc] init];
-    step.pencil     = self;
-	step.type		= MTDrawingStepTypeMove;
-	step.endType	= MTDrawingStepDestinationTypeRelative;
-	step.angle		= angle;
-	step.length		= distance;
-	[_steps addObject:step];
-}
-
-
-
-
-
-
-#pragma mark Drawing
-
-- (void)drawTo:(CGPoint)point speed:(MTPencilSpeed)speed
-{
-	MTDrawingStep *step	= [[MTDrawingStep alloc] init];
-    step.pencil     = self;
-	step.type		= MTDrawingStepTypeDraw;
-	step.endType	= MTDrawingStepDestinationTypeAbsolute;
-	step.endPoint	= point;
-	step.speed      = speed;
-	[_steps addObject:step];
-}
-
-- (void)drawAtAngle:(MTPencilAngle)angle distance:(CGFloat)distance speed:(MTPencilSpeed)speed
-{
-	MTDrawingStep *step	= [[MTDrawingStep alloc] init];
-    step.pencil     = self;
-	step.type		= MTDrawingStepTypeDraw;
-	step.endType	= MTDrawingStepDestinationTypeRelative;
-	step.angle		= angle;
-	step.length		= distance;
-	step.speed      = speed;
-	[_steps addObject:step];
-}
-
-- (void)drawToEdgeAtAngle:(MTPencilAngle)angle inset:(CGFloat)inset speed:(MTPencilSpeed)speed
-{
-	MTDrawingStep *step	= [[MTDrawingStep alloc] init];
-    step.pencil     = self;
-	step.type		= MTDrawingStepTypeDraw;
-	step.endType	= MTDrawingStepDestinationTypeRelative;
-	step.angle		= angle;
-	step.length		= INFINITY;
-	step.inset		= inset;
-	step.speed      = speed;
-	[_steps addObject:step];
-}
-
-
-
-
-
-
-
-- (void)animate
-{
-    if (&UIGraphicsGetCurrentContext)
-        [self animateInGraphicsContext:UIGraphicsGetCurrentContext()];
-}
-
-- (void)animateInGraphicsContext:(CGContextRef)context
-{
-	for (MTDrawingStep *step in _steps) {
-
-		step.startPoint = _currentStartPoint;
-		CGContextMoveToPoint(context, step.startPoint.x, step.startPoint.y);
-
-        if (step.endType == MTDrawingStepDestinationTypeRelative && step.currentFrame == 1) {
-            CGPoint endPoint;
-            endPoint = CGPointMake(step.startPoint.x + step.length, step.startPoint.y);
-            endPoint = CGPointRotatedAroundPoint(endPoint, step.startPoint, step.angle);
-            step.endPoint = endPoint;
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPoint point = CGPointZero;
+    for (MTPencilStep *step in self.steps) {
+        CGPathRef p = [step immediatePathFromPoint:point];
+        if (p != NULL) {
+            CGPathAddPath(path, NULL, p);
+            point = step.endPoint;
         }
-
-		CGFloat stepLength	= step.length / step.totalFrames;
-
-		CGPoint nextPoint;
-        if (stepLength  > 0)
-            nextPoint = CGPointAlongLine(CGLineMake(step.startPoint, step.endPoint), (stepLength * step.currentFrame));
-        else
-            nextPoint = step.currentPoint;
-
-        if (step.type == MTDrawingStepTypeDraw) {
-            CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y);
+        else if (!CGPointEqualToPoint(step.endPoint, NULL_POINT)) {
+            CGPathMoveToPoint(path, NULL, step.endPoint.x, step.endPoint.y);
+            point = step.endPoint;
         }
-        else if (step.type == MTDrawingStepTypeMove){
-            CGContextMoveToPoint(context, nextPoint.x, nextPoint.y);
+    }
+
+    return path;
+}
+
+- (void)erase
+{
+    for (MTPencilStep *step in self.steps) {
+        [step removeFromSuperlayer];
+    }
+    self.isDrawn        = NO;
+    self.isErased       = YES;
+    self.isCancelled    = NO;
+}
+
+- (void)reset
+{
+    [self erase];
+    [self.steps removeAllObjects];
+    self.completion         = nil;
+    self.eraseCompletion    = nil;
+    self.isDrawing          = NO;
+    self.isDrawn            = NO;
+    _currentStartPoint      = CGPointZero;
+    _shouldAnimate          = YES;
+    self.isCancelled        = NO;
+    self.isErased           = NO;
+
+}
+
+- (void)cancel
+{
+    self.isCancelled = YES;
+}
+
+- (void)complete
+{
+    _shouldAnimate = NO;
+    self.completion = nil;
+    [self beginDrawing];
+}
+
+- (void)setDrawsAsynchronously:(BOOL)drawsAsynchronously
+{
+    _drawsAsynchronously = drawsAsynchronously;
+    for (MTPencilStep *step in self.steps) {
+        step.drawsAsynchronously = _drawsAsynchronously;
+    }
+}
+
+
+
+#pragma mark (add steps)
+
+- (MTPencilStep *)move
+{
+    MTPencilStep *step          = [MTPencilStep new];
+    step.type                   = MTPencilStepTypeMove;
+    step.delegate               = self;
+    step.frame                  = _view.bounds;
+    step.bounds                 = _view.bounds;
+    step.drawsAsynchronously    = _drawsAsynchronously;
+    [self.steps addObject:step];
+    return step;
+}
+
+- (MTPencilStep *)draw
+{
+    MTPencilStep *step          = [MTPencilStep new];
+    step.type                   = MTPencilStepTypeDraw;
+    step.delegate               = self;
+    step.frame                  = _view.bounds;
+    step.bounds                 = _view.bounds;
+    step.drawsAsynchronously    = _drawsAsynchronously;
+    [self.steps addObject:step];
+    return step;
+}
+
+
+
+
+#pragma mark - DELEGATE pencil step
+
+- (void)pencilStep:(MTPencilStep *)finishedStep didFinish:(BOOL)finished
+{
+    _currentStartPoint = finishedStep.endPoint;
+
+    if (self.isCancelled) {
+        return;
+    }
+
+    for (MTPencilStep *step in self.steps) {
+        if (!step.finished) {
+            [_view.layer addSublayer:step];
+            [step inheritFromStep:finishedStep];
+            [step startFromPoint:_currentStartPoint animated:_shouldAnimate];
+            return;
         }
-
-		step.currentPoint = nextPoint;
-
-		step.finished = step.currentFrame == step.totalFrames;
-
-		if (step.finished) {
-			_currentStartPoint = step.currentPoint;
-		}
-		else {
-			step.currentFrame++;
-			break;
-		}
-	}
-
-	CGContextStrokePath(context);
-
-	MTDrawingStep *lastStep = _steps.lastObject;
-	if (lastStep && !lastStep.finished) {
-		[NSTimer scheduledTimerWithTimeInterval:(1.0 / _framesPerSecond) target:self selector:@selector(timerTicked) userInfo:nil repeats:NO];
-	}
-	else {
-		if (_completionBlock) _completionBlock(self);
-	}
+    }
+    self.isDrawing  = NO;
+    self.isDrawn    = YES;
+    self.isErasing  = NO;
+    self.isErased   = NO;
+    if (self.completion) self.completion(self);
 }
 
-
-
-
-#pragma mark Helpers
-
-+ (MTPencilSpeed)speedForDuration:(NSTimeInterval)duration overDistance:(CGFloat)distance
+- (void)pencilStep:(MTPencilStep *)erasedStep didErase:(BOOL)finished
 {
-    return distance / duration;
+    [erasedStep removeFromSuperlayer];
+
+    if (self.isCancelled) {
+        return;
+    }
+
+    for (MTPencilStep *step in [self.steps reverseObjectEnumerator]) {
+        if (step.finished) {
+            [step eraseWithCompletion:nil];
+            return;
+        }
+    }
+    self.isDrawing  = NO;
+    self.isDrawn    = NO;
+    self.isErasing  = NO;
+    self.isErased   = YES;
+    if (self.eraseCompletion) self.eraseCompletion(self);
 }
 
-+ (NSTimeInterval)durationForSpeed:(MTPencilSpeed)speed overDistance:(CGFloat)distance
+
+
+
+#pragma mark - Private
+
+- (void)beginDrawing
 {
-    return distance / speed;
+    if (self.isDrawing || self.isErasing || self.isDrawn || self.isCancelled) {
+        if (self.completion) self.completion(self);
+        return;
+    }
+
+    self.isDrawing      = YES;
+    self.isErasing      = NO;
+    self.isCancelled    = NO;
+    self.isErased       = NO;
+
+    for (MTPencilStep *step in self.steps) {
+        [step reset];
+    }
+
+    if ([self.steps count] > 0) {
+        MTPencilStep *firstStep = self.steps[0];
+        [_view.layer addSublayer:firstStep];
+        [firstStep startFromPoint:CGPointZero animated:_shouldAnimate];
+    }
 }
-
-
-
-
-#pragma mark - Private Methods
-
-- (void)timerTicked
-{
-	[_view setNeedsDisplay];
-}
-
-
 
 @end

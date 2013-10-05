@@ -13,7 +13,7 @@
 
 
 @interface MTViewController ()
-@property (weak, nonatomic) IBOutlet MTTestView *testView;
+@property (nonatomic, weak) IBOutlet MTTestView *testView;
 @end
 
 
