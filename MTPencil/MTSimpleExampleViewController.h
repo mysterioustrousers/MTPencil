@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MTViewController : UIViewController
+@interface MTSimpleExampleViewController : UIViewController
 
 @end

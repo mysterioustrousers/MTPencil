@@ -9,41 +9,63 @@
 #import "MTPencilStep.h"
 
 
+typedef NS_ENUM(NSUInteger, MTPencilState) {
+    MTPencilStateNotStarted,
+    MTPencilStateDrawing,
+    MTPencilStateDrawn,
+    MTPencilStateErasing
+};
+
+
 @interface MTPencil : NSObject
 
-@property (nonatomic, strong) NSMutableArray *steps;
-@property (nonatomic, assign) BOOL           drawsAsynchronously;
-@property (nonatomic, copy) void           (^completion)(MTPencil *pencil);
-@property (nonatomic, copy) void           (^eraseCompletion)(MTPencil *pencil);
-@property (nonatomic, assign) BOOL           isDrawing;
-@property (nonatomic, assign) BOOL           isDrawn;
-@property (nonatomic, assign) BOOL           isErasing;
-@property (nonatomic, assign) BOOL           isErased;
-@property (nonatomic, assign) BOOL           isCancelled;
+@property (nonatomic, strong, readonly) UIView         *view;
+@property (nonatomic, strong, readonly) NSMutableArray *steps;
+@property (nonatomic, assign, readonly) MTPencilState  state;
+@property (nonatomic, assign          ) BOOL           drawsAsynchronously;
+@property (nonatomic, copy            ) void           (^completion)(MTPencil *pencil);
+@property (nonatomic, copy            ) void           (^eraseCompletion)(MTPencil *pencil);
 
+
+///------------------------------
+/// Creating a pencil
+///------------------------------
 
 + (MTPencil *)pencilWithView:(UIView *)view;
+
+
+///------------------------------
+/// Adding Drawing Steps
+///------------------------------
+
+- (MTPencilStep *)move;
+
+- (MTPencilStep *)draw;
+
+
+///------------------------------
+/// Controlling Playback
+///------------------------------
 
 - (void)beginWithCompletion:(void (^)(MTPencil *pencil))completion;
 
 - (void)eraseWithCompletion:(void (^)(MTPencil *pencil))completion;
 
-- (CGPathRef)fullPath;
+- (void)scrub:(CGFloat)percent;
+
+- (void)finish;
 
 - (void)erase;
 
 - (void)reset;
 
-- (void)cancel;
 
-- (void)complete;
+///------------------------------
+/// Getting Generated Paths
+///------------------------------
 
+- (CGPathRef)CGPath;
 
-#pragma mark - Add Steps
-
-- (MTPencilStep *)move;
-
-- (MTPencilStep *)draw;
 
 
 @end

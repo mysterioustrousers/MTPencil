@@ -9,6 +9,7 @@
 #import "MTPencilStep.h"
 #import <MTGeometry.h>
 
+
 typedef NS_ENUM(NSUInteger, MTPencilStepDestinationType) {
 	MTPencilStepDestinationTypeAbsolute,
     MTPencilStepDestinationTypeRelative
@@ -18,20 +19,18 @@ typedef NS_ENUM(NSUInteger, MTPencilStepDestinationType) {
 @protocol MTPencilStepDelegate;
 
 
-@interface MTPencilStep () {
-    void (^_eraseCompletion)(MTPencilStep *step);
-    MTPencilStepDestinationType _destinationType;
-}
-@property (nonatomic, weak) id<MTPencilStepDelegate>    delegate;
-@property (nonatomic, assign) BOOL                        finished;
+@interface MTPencilStep ()
+@property (nonatomic, assign, readwrite) MTPencilStepType            type;
+@property (nonatomic, assign, readwrite) MTPencilStepState           state;
+@property (nonatomic, weak             ) id<MTPencilStepDelegate>    delegate;
+@property (nonatomic, assign           ) MTPencilStepDestinationType destinationType;
+@property (nonatomic, assign, readwrite) CGFloat                     length;
 - (void)inheritFromStep:(MTPencilStep *)step;
-- (void)startFromPoint:(CGPoint)point animated:(BOOL)animated;
-- (CGPathRef)immediatePathFromPoint:(CGPoint)point;
-- (void)reset;
 @end
 
 
 @protocol MTPencilStepDelegate <NSObject>
 - (void)pencilStep:(MTPencilStep *)step didFinish:(BOOL)finished;
 - (void)pencilStep:(MTPencilStep *)step didErase:(BOOL)finished;
+- (CGFloat)pencilStep:(MTPencilStep *)step valueForEdge:(UIRectEdge)edge;
 @end

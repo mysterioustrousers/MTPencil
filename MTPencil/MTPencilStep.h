@@ -6,7 +6,18 @@
 //  Copyright (c) 2013 Mysterious Trousers. All rights reserved.
 //
 
+#import "MTTimingFunctions.h"
+
+
 @class MTPencil;
+
+
+typedef NS_ENUM(NSUInteger, MTPencilStepState) {
+    MTPencilStepStateNotStarted,
+    MTPencilStepStateDrawing,
+    MTPencilStepStateDrawn,
+    MTPencilStepStateErasing
+};
 
 
 typedef NS_ENUM(NSUInteger, MTPencilStepType) {
@@ -26,7 +37,10 @@ typedef NS_ENUM(NSInteger, MTPencilStepAngle) {
     MTPencilStepAngleDownLeft     = 135
 };
 
-// Pencil speed is in points per second (PPS). On a standard resolution a point is a pixel, on a retina display, a point is 2 pixels.
+/**
+ * Pencil speed is in points per second (PPS). On a standard
+ * resolution a point is a pixel, on a retina display, a point is 2 pixels.
+ */
 typedef NS_ENUM(NSUInteger, MTPencilStepSpeed) {
     MTPencilStepSpeedVerySlow   = 100,
     MTPencilStepSpeedSlow       = 400,
@@ -39,18 +53,38 @@ typedef NS_ENUM(NSUInteger, MTPencilStepSpeed) {
 
 @interface MTPencilStep : CAShapeLayer
 
-@property (nonatomic, assign) MTPencilStepType type;
-@property (nonatomic, assign) CGPoint          startPoint;
-@property (nonatomic, assign) CGPoint          endPoint;
-@property (nonatomic, assign) CGFloat          angle;
-@property (nonatomic, assign) CGFloat          distance;
-@property (nonatomic, assign) UIRectEdge       toEdge;
-@property (nonatomic, assign) CGFloat          inset;
-@property (nonatomic, assign) NSTimeInterval   delay;
-@property (nonatomic, assign) CGFloat          animationSpeed;
-@property (nonatomic, assign) CGFloat          animationDuration;
-@property (nonatomic, assign) CGPathRef        appendPath;
-@property (nonatomic, copy) void             (^completion)(MTPencilStep *step);
+@property (nonatomic, assign, readonly) MTPencilStepType   type;
+@property (nonatomic, assign, readonly) MTPencilStepState  state;
+@property (nonatomic, assign          ) CGPoint            startPoint;
+@property (nonatomic, assign          ) CGPoint            endPoint;
+@property (nonatomic, assign          ) CGFloat            angle;
+@property (nonatomic, assign          ) CGFloat            distance;
+@property (nonatomic, assign          ) UIRectEdge         toEdge;
+@property (nonatomic, assign          ) CGFloat            inset;
+@property (nonatomic, assign          ) NSTimeInterval     delay;
+@property (nonatomic, assign          ) CGFloat            animationSpeed;
+@property (nonatomic, assign          ) CGFloat            animationDuration;
+@property (nonatomic, assign          ) CGPathRef          appendPath;
+@property (nonatomic, assign, readonly) CGFloat            length;
+@property (nonatomic, copy            ) NSAttributedString *attributedString;
+@property (nonatomic, assign          ) MTTimingFunction   easingFunction;
+@property (nonatomic, copy            ) void               (^completion)(MTPencilStep *step);
+@property (nonatomic, copy            ) void               (^eraseCompletion)(MTPencilStep *step);
+
+
+///------------------------------------------
+/// Controlling Playback
+///------------------------------------------
+
+- (void)drawWithCompletion:(void (^)(MTPencilStep *step))completion;
+
+- (void)eraseWithCompletion:(void (^)(MTPencilStep *step))eraseCompletion;
+
+- (void)scrub:(CGFloat)percent;
+
+- (void)finish;
+
+- (void)erase;
 
 
 ///-----------------------------------------
@@ -58,7 +92,6 @@ typedef NS_ENUM(NSUInteger, MTPencilStepSpeed) {
 ///-----------------------------------------
 
 - (MTPencilStep *)to:(CGPoint)point;
-
 
 - (MTPencilStep *)angle:(CGFloat)angle distance:(CGFloat)distance;
 
@@ -83,31 +116,48 @@ typedef NS_ENUM(NSUInteger, MTPencilStepSpeed) {
 
 
 ///------------------------------------------
-/// Speed (inherited by proceeding steps)
+/// Adding Text
+///------------------------------------------
+
+- (MTPencilStep *)string:(NSString *)string;
+
+- (MTPencilStep *)attributedString:(NSAttributedString *)attributedString;
+
+
+///------------------------------------------
+/// Speed (Inherited by Proceeding Steps)
 ///------------------------------------------
 
 - (MTPencilStep *)speed:(CGFloat)speed;
 
 - (MTPencilStep *)duration:(NSTimeInterval)duration;
 
+- (MTPencilStep *)easingFunction:(MTTimingFunction)easingFunction;
+
 
 ///------------------------------------------
-/// Appearance (inherited by proceeding steps)
+/// Appearance (Inherited by Proceeding Steps)
 ///------------------------------------------
 
-- (MTPencilStep *)color:(UIColor *)color;
+- (MTPencilStep *)strokeColor:(UIColor *)color;
 
 - (MTPencilStep *)width:(CGFloat)width;
 
+- (MTPencilStep *)font:(UIFont *)font;
+
 
 ///------------------------------------------
-/// Misc.
+/// Misc
 ///------------------------------------------
 
 - (MTPencilStep *)delay:(NSTimeInterval)delay;
 
-- (MTPencilStep *)completion:(void (^)(MTPencilStep *step))completion;
 
-- (void)eraseWithCompletion:(void (^)(MTPencilStep *step))completion;
+///------------------------------------------
+/// Getting Generated Paths
+///------------------------------------------
+
+- (CGPathRef)CGPath;
+
 
 @end
