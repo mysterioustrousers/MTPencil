@@ -9,14 +9,15 @@
 /* Begin PBXBuildFile section */
 		2E8BD62B18E74DAE8BFEC7C9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1AB105429748ED8BD8F4EA /* libPods.a */; };
 		C206CFEF17F0E94100BFE527 /* MTPencilStep.m in Sources */ = {isa = PBXBuildFile; fileRef = C206CFEE17F0E94100BFE527 /* MTPencilStep.m */; };
+		C2083F86180982840078C0FA /* MTCurvesExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2083F7F180982840078C0FA /* MTCurvesExampleViewController.m */; };
+		C2083F87180982840078C0FA /* MTEasingExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2083F81180982840078C0FA /* MTEasingExampleViewController.m */; };
+		C2083F88180982840078C0FA /* MTScrubExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2083F83180982840078C0FA /* MTScrubExampleViewController.m */; };
+		C2083F89180982840078C0FA /* MTTextExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2083F85180982840078C0FA /* MTTextExampleViewController.m */; };
 		C23B67F518090794001A29C2 /* MTRelativeExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23B67F418090794001A29C2 /* MTRelativeExampleViewController.m */; };
-		C24325A11806427E00E46B23 /* MTScrubExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24325A01806427E00E46B23 /* MTScrubExampleViewController.m */; };
-		C24325A4180655C800E46B23 /* MTCurvesExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24325A3180655C800E46B23 /* MTCurvesExampleViewController.m */; };
 		C2496B6B167EDB0D007E0246 /* MTPencil.m in Sources */ = {isa = PBXBuildFile; fileRef = C2496B6A167EDB0D007E0246 /* MTPencil.m */; };
 		C2496B6C167EDB52007E0246 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C266AB4F15F526B1001C3DA2 /* MainStoryboard_iPad.storyboard */; };
 		C2496B6D167EDB52007E0246 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C266AB5115F526B1001C3DA2 /* MainStoryboard_iPhone.storyboard */; };
 		C24CD4F41680ECBB004382D2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C24CD4F31680ECBB004382D2 /* Default-568h@2x.png */; };
-		C25150AC180756F800F37DCE /* MTTextExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25150AB180756F800F37DCE /* MTTextExampleViewController.m */; };
 		C266AAE815F2829D001C3DA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAE715F2829D001C3DA2 /* UIKit.framework */; };
 		C266AAEA15F2829D001C3DA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAE915F2829D001C3DA2 /* Foundation.framework */; };
 		C266AAEC15F2829D001C3DA2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C266AAEB15F2829D001C3DA2 /* CoreGraphics.framework */; };
@@ -28,7 +29,6 @@
 		C266AB4715F52693001C3DA2 /* MTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB3D15F52693001C3DA2 /* MTAppDelegate.m */; };
 		C266AB4B15F52693001C3DA2 /* MTSimpleExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB4515F52693001C3DA2 /* MTSimpleExampleViewController.m */; };
 		C266AB5A15F526D0001C3DA2 /* MTPencilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB5815F526D0001C3DA2 /* MTPencilTests.m */; };
-		C269544C1807B4DE0013ECA0 /* MTEasingExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C269544B1807B4DE0013ECA0 /* MTEasingExampleViewController.m */; };
 		C269544F1807BF140013ECA0 /* MTPencilEasingFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = C269544E1807BF140013ECA0 /* MTPencilEasingFunctions.c */; };
 		C2F27D8A17F21316004539A1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2F27D8917F21316004539A1 /* Images.xcassets */; };
 		C2F27D8C17F2132F004539A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F27D8B17F2132F004539A1 /* QuartzCore.framework */; };
@@ -49,18 +49,20 @@
 		AC1AB105429748ED8BD8F4EA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C206CFED17F0E94100BFE527 /* MTPencilStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTPencilStep.h; path = MTPencil/MTPencilStep.h; sourceTree = SOURCE_ROOT; };
 		C206CFEE17F0E94100BFE527 /* MTPencilStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTPencilStep.m; path = MTPencil/MTPencilStep.m; sourceTree = SOURCE_ROOT; };
-		C23B67F318090794001A29C2 /* MTRelativeExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRelativeExampleViewController.h; sourceTree = SOURCE_ROOT; };
-		C23B67F418090794001A29C2 /* MTRelativeExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRelativeExampleViewController.m; sourceTree = SOURCE_ROOT; };
+		C2083F7E180982840078C0FA /* MTCurvesExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTCurvesExampleViewController.h; path = MTPencil/MTCurvesExampleViewController.h; sourceTree = SOURCE_ROOT; };
+		C2083F7F180982840078C0FA /* MTCurvesExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTCurvesExampleViewController.m; path = MTPencil/MTCurvesExampleViewController.m; sourceTree = SOURCE_ROOT; };
+		C2083F80180982840078C0FA /* MTEasingExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTEasingExampleViewController.h; path = MTPencil/MTEasingExampleViewController.h; sourceTree = SOURCE_ROOT; };
+		C2083F81180982840078C0FA /* MTEasingExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTEasingExampleViewController.m; path = MTPencil/MTEasingExampleViewController.m; sourceTree = SOURCE_ROOT; };
+		C2083F82180982840078C0FA /* MTScrubExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTScrubExampleViewController.h; path = MTPencil/MTScrubExampleViewController.h; sourceTree = SOURCE_ROOT; };
+		C2083F83180982840078C0FA /* MTScrubExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTScrubExampleViewController.m; path = MTPencil/MTScrubExampleViewController.m; sourceTree = SOURCE_ROOT; };
+		C2083F84180982840078C0FA /* MTTextExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTTextExampleViewController.h; path = MTPencil/MTTextExampleViewController.h; sourceTree = SOURCE_ROOT; };
+		C2083F85180982840078C0FA /* MTTextExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTTextExampleViewController.m; path = MTPencil/MTTextExampleViewController.m; sourceTree = SOURCE_ROOT; };
+		C23B67F318090794001A29C2 /* MTRelativeExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTRelativeExampleViewController.h; path = MTPencil/MTRelativeExampleViewController.h; sourceTree = SOURCE_ROOT; };
+		C23B67F418090794001A29C2 /* MTRelativeExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTRelativeExampleViewController.m; path = MTPencil/MTRelativeExampleViewController.m; sourceTree = SOURCE_ROOT; };
 		C24250ED17F117DA00B6142F /* MTPencilStep_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTPencilStep_Private.h; path = MTPencil/MTPencilStep_Private.h; sourceTree = SOURCE_ROOT; };
-		C243259F1806427E00E46B23 /* MTScrubExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTScrubExampleViewController.h; sourceTree = SOURCE_ROOT; };
-		C24325A01806427E00E46B23 /* MTScrubExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTScrubExampleViewController.m; sourceTree = SOURCE_ROOT; };
-		C24325A2180655C800E46B23 /* MTCurvesExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTCurvesExampleViewController.h; sourceTree = SOURCE_ROOT; };
-		C24325A3180655C800E46B23 /* MTCurvesExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTCurvesExampleViewController.m; sourceTree = SOURCE_ROOT; };
 		C2496B69167EDB0D007E0246 /* MTPencil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = MTPencil.h; path = MTPencil/MTPencil.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C2496B6A167EDB0D007E0246 /* MTPencil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTPencil.m; path = MTPencil/MTPencil.m; sourceTree = SOURCE_ROOT; };
 		C24CD4F31680ECBB004382D2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
-		C25150AA180756F800F37DCE /* MTTextExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTextExampleViewController.h; sourceTree = SOURCE_ROOT; };
-		C25150AB180756F800F37DCE /* MTTextExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTextExampleViewController.m; sourceTree = SOURCE_ROOT; };
 		C266AAE315F2829D001C3DA2 /* MTPencil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTPencil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C266AAE715F2829D001C3DA2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C266AAE915F2829D001C3DA2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -81,10 +83,8 @@
 		C266AB5715F526D0001C3DA2 /* MTPencilTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTPencilTests.h; path = MTPencilTests/MTPencilTests.h; sourceTree = SOURCE_ROOT; };
 		C266AB5815F526D0001C3DA2 /* MTPencilTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTPencilTests.m; path = MTPencilTests/MTPencilTests.m; sourceTree = SOURCE_ROOT; };
 		C266AB5D15F527A7001C3DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MTPencilTests/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
-		C269544A1807B4DE0013ECA0 /* MTEasingExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTEasingExampleViewController.h; sourceTree = SOURCE_ROOT; };
-		C269544B1807B4DE0013ECA0 /* MTEasingExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTEasingExampleViewController.m; sourceTree = SOURCE_ROOT; };
-		C269544D1807BF140013ECA0 /* MTPencilEasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTPencilEasingFunctions.h; sourceTree = SOURCE_ROOT; };
-		C269544E1807BF140013ECA0 /* MTPencilEasingFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MTPencilEasingFunctions.c; sourceTree = SOURCE_ROOT; };
+		C269544D1807BF140013ECA0 /* MTPencilEasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTPencilEasingFunctions.h; path = MTPencil/MTPencilEasingFunctions.h; sourceTree = SOURCE_ROOT; };
+		C269544E1807BF140013ECA0 /* MTPencilEasingFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MTPencilEasingFunctions.c; path = MTPencil/MTPencilEasingFunctions.c; sourceTree = SOURCE_ROOT; };
 		C2F27D8917F21316004539A1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MTPencil/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		C2F27D8B17F2132F004539A1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -217,14 +217,14 @@
 				C266AB4515F52693001C3DA2 /* MTSimpleExampleViewController.m */,
 				C23B67F318090794001A29C2 /* MTRelativeExampleViewController.h */,
 				C23B67F418090794001A29C2 /* MTRelativeExampleViewController.m */,
-				C24325A2180655C800E46B23 /* MTCurvesExampleViewController.h */,
-				C24325A3180655C800E46B23 /* MTCurvesExampleViewController.m */,
-				C25150AA180756F800F37DCE /* MTTextExampleViewController.h */,
-				C25150AB180756F800F37DCE /* MTTextExampleViewController.m */,
-				C243259F1806427E00E46B23 /* MTScrubExampleViewController.h */,
-				C24325A01806427E00E46B23 /* MTScrubExampleViewController.m */,
-				C269544A1807B4DE0013ECA0 /* MTEasingExampleViewController.h */,
-				C269544B1807B4DE0013ECA0 /* MTEasingExampleViewController.m */,
+				C2083F7E180982840078C0FA /* MTCurvesExampleViewController.h */,
+				C2083F7F180982840078C0FA /* MTCurvesExampleViewController.m */,
+				C2083F84180982840078C0FA /* MTTextExampleViewController.h */,
+				C2083F85180982840078C0FA /* MTTextExampleViewController.m */,
+				C2083F82180982840078C0FA /* MTScrubExampleViewController.h */,
+				C2083F83180982840078C0FA /* MTScrubExampleViewController.m */,
+				C2083F80180982840078C0FA /* MTEasingExampleViewController.h */,
+				C2083F81180982840078C0FA /* MTEasingExampleViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -354,16 +354,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C206CFEF17F0E94100BFE527 /* MTPencilStep.m in Sources */,
-				C25150AC180756F800F37DCE /* MTTextExampleViewController.m in Sources */,
 				C269544F1807BF140013ECA0 /* MTPencilEasingFunctions.c in Sources */,
 				C266AB4615F52693001C3DA2 /* main.m in Sources */,
 				C266AB4715F52693001C3DA2 /* MTAppDelegate.m in Sources */,
 				C266AB4B15F52693001C3DA2 /* MTSimpleExampleViewController.m in Sources */,
+				C2083F89180982840078C0FA /* MTTextExampleViewController.m in Sources */,
 				C23B67F518090794001A29C2 /* MTRelativeExampleViewController.m in Sources */,
-				C24325A11806427E00E46B23 /* MTScrubExampleViewController.m in Sources */,
-				C24325A4180655C800E46B23 /* MTCurvesExampleViewController.m in Sources */,
-				C269544C1807B4DE0013ECA0 /* MTEasingExampleViewController.m in Sources */,
+				C2083F86180982840078C0FA /* MTCurvesExampleViewController.m in Sources */,
 				C2496B6B167EDB0D007E0246 /* MTPencil.m in Sources */,
+				C2083F88180982840078C0FA /* MTScrubExampleViewController.m in Sources */,
+				C2083F87180982840078C0FA /* MTEasingExampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
