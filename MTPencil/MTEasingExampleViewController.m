@@ -27,7 +27,9 @@
 
 	_pencil = [MTPencil pencilWithView:self.view];
 
-	[[[_pencil move] to:CGPointMake(100, 150)] duration:1];
+    [[_pencil config] easingFunction:kMTPencilEaseOutExpo];
+    [[_pencil config] duration:1.0];
+	[[_pencil move] to:CGPointMake(100, 150)];
 	[[[_pencil draw] angle:MTPencilStepAngleUpRight    distance:20]     easingFunction:kMTPencilEaseOutBounce];
 	[[[_pencil draw] angle:MTPencilStepAngleUp         distance:50]     easingFunction:kMTPencilEaseInExpo];
 	[[[_pencil draw] angle:MTPencilStepAngleRight      distance:100]	easingFunction:kMTPencilEaseInOutExpo];
@@ -35,6 +37,14 @@
 	[[[_pencil draw] angle:MTPencilStepAngleLeft       distance:100]	easingFunction:kMTPencilEaseOutElastic];
 	[[[_pencil draw] angle:MTPencilStepAngleUp         distance:123]	easingFunction:kMTPencilEaseInOutExpo];
 	[[[_pencil draw] angle:MTPencilStepAngleUpLeft     distance:20]     easingFunction:kMTPencilEaseLinear];
+//    [[_pencil draw] angle:MTPencilStepAngleUpRight    distance:20];
+//	[[_pencil draw] angle:MTPencilStepAngleUp         distance:50];
+//	[[_pencil draw] angle:MTPencilStepAngleRight      distance:100];
+//    [[_pencil draw] angle:MTPencilStepAngleDown       distance:200];
+//	[[_pencil draw] angle:MTPencilStepAngleLeft       distance:100];
+//	[[_pencil draw] angle:MTPencilStepAngleUp         distance:123];
+//	[[_pencil draw] angle:MTPencilStepAngleUpLeft     distance:20];
+
 
 
     CGRect frame = CGRectMake(0, 150, 290, 289);

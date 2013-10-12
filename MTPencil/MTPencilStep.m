@@ -82,18 +82,24 @@
 
 - (void)drawWithCompletion:(void (^)(MTPencilStep *))completion
 {
+    if (self.type == MTPencilStepTypeConfig) {
+        [self.delegate pencilStep:self didFinish:YES];
+        return;
+    }
+
     if (self.state != MTPencilStepStateNotStarted) {
         return;
     }
 
     self.completion = completion;
+    [self generatePath];
+    self.state = MTPencilStepStateDrawing;
 
     double delayInSeconds = self.delay;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 
         if (self.type == MTPencilStepTypeDraw) {
-            [self generatePath];
             [self addDrawingAnimation];
         }
         else if (self.type == MTPencilStepTypeMove) {
@@ -260,9 +266,9 @@
 
 #pragma mark (Appearance)
 
-- (MTPencilStep *)strokeColor:(UIColor *)color
+- (MTPencilStep *)strokeColor:(UIColor *)strokeColor
 {
-    self.strokeColor = color.CGColor;
+    self.strokeColor = strokeColor.CGColor;
     return self;
 }
 
@@ -294,7 +300,9 @@
 - (CGPathRef)CGPath
 {
     if (self.type == MTPencilStepTypeDraw) {
-        [self generatePath];
+        if (!self.path) {
+            [self generatePath];
+        }
         return self.path;
     }
     else if (self.type == MTPencilStepTypeMove) {
@@ -369,7 +377,7 @@ static CGFloat measuringLengthCurrentLength;
         self.animationDuration = step.animationDuration;
     }
 
-    if (!self.strokeColor) {
+    if (CGColorEqualToColor(self.strokeColor, [UIColor blackColor].CGColor)) {
         self.strokeColor = step.strokeColor;
     }
 
@@ -497,6 +505,7 @@ static CGFloat measuringLengthCurrentLength;
 
 - (void)addDrawingAnimation
 {
+    self.hidden = NO;
     [self calculateDuration];
     self.state = MTPencilStepStateDrawing;
     CAKeyframeAnimation *keyframeAnimation  = [CAKeyframeAnimation new];

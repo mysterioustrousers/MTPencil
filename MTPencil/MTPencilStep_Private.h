@@ -31,6 +31,6 @@ typedef NS_ENUM(NSUInteger, MTPencilStepDestinationType) {
 
 @protocol MTPencilStepDelegate <NSObject>
 - (void)pencilStep:(MTPencilStep *)step didFinish:(BOOL)finished;
-- (void)pencilStep:(MTPencilStep *)step didErase:(BOOL)finished;
+- (void)pencilStep:(MTPencilStep *)step didErase:(BOOL)erased;
 - (CGFloat)pencilStep:(MTPencilStep *)step valueForEdge:(UIRectEdge)edge;
 @end

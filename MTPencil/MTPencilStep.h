@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, MTPencilStepState) {
 
 
 typedef NS_ENUM(NSUInteger, MTPencilStepType) {
+    MTPencilStepTypeConfig,
 	MTPencilStepTypeMove,
 	MTPencilStepTypeDraw
 };

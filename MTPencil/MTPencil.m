@@ -34,7 +34,7 @@
 
 - (void)dealloc
 {
-    for (MTPencilStep *step in self.steps) {
+    for (MTPencilStep *step in [self actionSteps]) {
         [step removeFromSuperlayer];
     }
 }
@@ -52,6 +52,15 @@
 }
 
 #pragma mark (Adding Drawing Steps)
+
+- (MTPencilStep *)config
+{
+    MTPencilStep *step          = [MTPencilStep new];
+    step.type                   = MTPencilStepTypeConfig;
+    step.delegate               = self;
+    [self.steps addObject:step];
+    return step;
+}
 
 - (MTPencilStep *)move
 {
@@ -92,7 +101,12 @@
 
     if ([self.steps count] > 0) {
         MTPencilStep *firstStep = self.steps[0];
-        [self.view.layer addSublayer:firstStep];
+        if (firstStep.type == MTPencilStepTypeConfig) {
+            firstStep.endPoint = CGPointZero;
+        }
+        else {
+            [self.view.layer addSublayer:firstStep];
+        }
         firstStep.startPoint = CGPointZero;
         [firstStep drawWithCompletion:firstStep.completion];
     }
@@ -108,7 +122,7 @@
     self.state              = MTPencilStateErasing;
     self.eraseCompletion    = completion;
 
-    MTPencilStep *lastStep = [self.steps lastObject];
+    MTPencilStep *lastStep = [[self actionSteps] lastObject];
     if (lastStep) {
         [lastStep eraseWithCompletion:lastStep.eraseCompletion];
     }
@@ -116,7 +130,7 @@
 
 - (void)scrub:(CGFloat)percent
 {
-    for (MTPencilStep *step in self.steps) {
+    for (MTPencilStep *step in [self actionSteps]) {
         if (!step.path) {
             [self finish];
         }
@@ -124,13 +138,13 @@
     }
 
     CGFloat totalLength = 0;
-    for (MTPencilStep *step in self.steps) {
+    for (MTPencilStep *step in [self actionSteps]) {
         totalLength += step.length;
     }
 
     CGFloat scrubLength = totalLength * percent;
 
-    for (MTPencilStep *step in self.steps) {
+    for (MTPencilStep *step in [self actionSteps]) {
         scrubLength -= step.length;
         if (scrubLength > 0) {
             [step scrub:1.0];
@@ -148,16 +162,21 @@
 {
     MTPencilStep *previousStep = nil;
     for (MTPencilStep *step in self.steps) {
-        if (CGPointEqualToPoint(step.startPoint, NULL_POINT)) {
-            if (previousStep) {
-                step.startPoint = previousStep.endPoint;
-            }
-            else {
-                step.startPoint = CGPointZero;
-            }
+        if (previousStep) {
+            [step inheritFromStep:previousStep];
         }
-        [step finish];
-        [self.view.layer addSublayer:step];
+        if (step.type != MTPencilStepTypeConfig) {
+            if (CGPointEqualToPoint(step.startPoint, NULL_POINT)) {
+                if (previousStep) {
+                    step.startPoint = previousStep.endPoint;
+                }
+                else {
+                    step.startPoint = CGPointZero;
+                }
+            }
+            [step finish];
+            [self.view.layer addSublayer:step];
+        }
         previousStep = step;
     }
     self.state = MTPencilStepStateDrawn;
@@ -166,7 +185,7 @@
 
 - (void)erase
 {
-    for (MTPencilStep *step in self.steps) {
+    for (MTPencilStep *step in [self actionSteps]) {
         [step erase];
     }
     self.state = MTPencilStateNotStarted;
@@ -186,7 +205,7 @@
 {
     CGMutablePathRef path = CGPathCreateMutable();
     CGPoint point = CGPointZero;
-    for (MTPencilStep *step in self.steps) {
+    for (MTPencilStep *step in [self actionSteps]) {
         step.startPoint = point;
         CGPathRef p = [step CGPath];
         if (p != NULL) {
@@ -222,8 +241,15 @@
 {
     for (MTPencilStep *step in self.steps) {
         if (step.state == MTPencilStepStateNotStarted) {
-            [self.view.layer addSublayer:step];
             [step inheritFromStep:finishedStep];
+            if (step.type == MTPencilStepTypeConfig) {
+                step.startPoint = step.endPoint = finishedStep.endPoint;
+                step.state = MTPencilStepStateDrawn;
+                finishedStep = step;
+                continue;
+            }
+            step.hidden = YES;
+            [self.view.layer addSublayer:step];
             step.startPoint = finishedStep.endPoint;
             [step drawWithCompletion:step.completion];
             return;
@@ -233,11 +259,11 @@
     if (self.completion) self.completion(self);
 }
 
-- (void)pencilStep:(MTPencilStep *)erasedStep didErase:(BOOL)finished
+- (void)pencilStep:(MTPencilStep *)erasedStep didErase:(BOOL)erased
 {
     [erasedStep removeFromSuperlayer];
 
-    for (MTPencilStep *step in [self.steps reverseObjectEnumerator]) {
+    for (MTPencilStep *step in [[self actionSteps] reverseObjectEnumerator]) {
         if (step.state == MTPencilStepStateDrawn) {
             [step eraseWithCompletion:step.eraseCompletion];
             return;
@@ -246,6 +272,11 @@
     self.state = MTPencilStateNotStarted;
     if (self.eraseCompletion) self.eraseCompletion(self);
 }
+
+
+
+
+#pragma mark - Private
 
 - (CGFloat)pencilStep:(MTPencilStep *)step valueForEdge:(UIRectEdge)edge
 {
@@ -264,6 +295,12 @@
     return 0;
 }
 
+- (NSArray *)actionSteps
+{
+    return [self.steps filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(MTPencilStep *step, NSDictionary *bindings) {
+        return step.type != MTPencilStepTypeConfig;
+    }]];
+}
 
 
 @end

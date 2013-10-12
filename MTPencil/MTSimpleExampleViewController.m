@@ -29,6 +29,7 @@
 
 	_pencil = [MTPencil pencilWithView:self.view];
 
+    [[_pencil config] strokeColor:[UIColor darkGrayColor]];
 	[[_pencil move] to:CGPointMake(100, 200)];
 	[[[_pencil draw] angle:MTPencilStepAngleUpRight distance:20]    speed:speed];
 	[[[_pencil draw] angle:MTPencilStepAngleUp      distance:50]    speed:speed];

@@ -38,6 +38,8 @@ typedef NS_ENUM(NSUInteger, MTPencilState) {
 /// Adding Drawing Steps
 ///------------------------------
 
+- (MTPencilStep *)config;
+
 - (MTPencilStep *)move;
 
 - (MTPencilStep *)draw;
