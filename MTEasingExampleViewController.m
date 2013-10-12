@@ -28,13 +28,13 @@
 	_pencil = [MTPencil pencilWithView:self.view];
 
 	[[[_pencil move] to:CGPointMake(100, 150)] duration:1];
-	[[[_pencil draw] angle:MTPencilStepAngleUpRight    distance:20]     easingFunction:kMTEaseOutBounce];
-	[[[_pencil draw] angle:MTPencilStepAngleUp         distance:50]     easingFunction:kMTEaseInExpo];
-	[[[_pencil draw] angle:MTPencilStepAngleRight      distance:100]	easingFunction:kMTEaseInOutExpo];
-    [[[_pencil draw] angle:MTPencilStepAngleDown       distance:200]	easingFunction:kMTEaseInBounce];
-	[[[_pencil draw] angle:MTPencilStepAngleLeft       distance:100]	easingFunction:kMTEaseOutElastic];
-	[[[_pencil draw] angle:MTPencilStepAngleUp         distance:123]	easingFunction:kMTEaseInOutExpo];
-	[[[_pencil draw] angle:MTPencilStepAngleUpLeft     distance:20]     easingFunction:kMTEaseLinear];
+	[[[_pencil draw] angle:MTPencilStepAngleUpRight    distance:20]     easingFunction:kMTPencilEaseOutBounce];
+	[[[_pencil draw] angle:MTPencilStepAngleUp         distance:50]     easingFunction:kMTPencilEaseInExpo];
+	[[[_pencil draw] angle:MTPencilStepAngleRight      distance:100]	easingFunction:kMTPencilEaseInOutExpo];
+    [[[_pencil draw] angle:MTPencilStepAngleDown       distance:200]	easingFunction:kMTPencilEaseInBounce];
+	[[[_pencil draw] angle:MTPencilStepAngleLeft       distance:100]	easingFunction:kMTPencilEaseOutElastic];
+	[[[_pencil draw] angle:MTPencilStepAngleUp         distance:123]	easingFunction:kMTPencilEaseInOutExpo];
+	[[[_pencil draw] angle:MTPencilStepAngleUpLeft     distance:20]     easingFunction:kMTPencilEaseLinear];
 
 
     CGRect frame = CGRectMake(0, 150, 290, 289);
@@ -52,7 +52,7 @@
     [bezierPath addCurveToPoint:CGPointMake(CGRectGetMinX(frame) + 217.5, CGRectGetMinY(frame) + 255.5) controlPoint1: CGPointMake(CGRectGetMinX(frame) + 197.04, CGRectGetMinY(frame) + 134.06) controlPoint2: CGPointMake(CGRectGetMinX(frame) + 217.08, CGRectGetMinY(frame) + 247.94)];
     [bezierPath addCurveToPoint:CGPointMake(CGRectGetMinX(frame) + 273.5, CGRectGetMinY(frame) + 144.5) controlPoint1: CGPointMake(CGRectGetMinX(frame) + 217.92, CGRectGetMinY(frame) + 263.06) controlPoint2: CGPointMake(CGRectGetMinX(frame) + 302.26, CGRectGetMinY(frame) + 183.11)];
     [bezierPath addCurveToPoint:CGPointMake(CGRectGetMinX(frame) + 240.5, CGRectGetMinY(frame) + 169.5) controlPoint1: CGPointMake(CGRectGetMinX(frame) + 244.74, CGRectGetMinY(frame) + 105.89) controlPoint2: CGPointMake(CGRectGetMinX(frame) + 240.5, CGRectGetMinY(frame) + 169.5)];
-    [[[[_pencil draw] path:bezierPath.CGPath] easingFunction:kMTEaseOutExpo] duration:4];
+    [[[[_pencil draw] path:bezierPath.CGPath] easingFunction:kMTPencilEaseOutExpo] duration:4];
 }
 
 

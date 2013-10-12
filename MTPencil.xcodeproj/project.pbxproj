@@ -29,7 +29,7 @@
 		C266AB4B15F52693001C3DA2 /* MTSimpleExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB4515F52693001C3DA2 /* MTSimpleExampleViewController.m */; };
 		C266AB5A15F526D0001C3DA2 /* MTPencilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C266AB5815F526D0001C3DA2 /* MTPencilTests.m */; };
 		C269544C1807B4DE0013ECA0 /* MTEasingExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C269544B1807B4DE0013ECA0 /* MTEasingExampleViewController.m */; };
-		C269544F1807BF140013ECA0 /* MTTimingFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = C269544E1807BF140013ECA0 /* MTTimingFunctions.c */; };
+		C269544F1807BF140013ECA0 /* MTPencilEasingFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = C269544E1807BF140013ECA0 /* MTPencilEasingFunctions.c */; };
 		C2F27D8A17F21316004539A1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2F27D8917F21316004539A1 /* Images.xcassets */; };
 		C2F27D8C17F2132F004539A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F27D8B17F2132F004539A1 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -83,8 +83,8 @@
 		C266AB5D15F527A7001C3DA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MTPencilTests/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		C269544A1807B4DE0013ECA0 /* MTEasingExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTEasingExampleViewController.h; sourceTree = SOURCE_ROOT; };
 		C269544B1807B4DE0013ECA0 /* MTEasingExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTEasingExampleViewController.m; sourceTree = SOURCE_ROOT; };
-		C269544D1807BF140013ECA0 /* MTTimingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTimingFunctions.h; sourceTree = SOURCE_ROOT; };
-		C269544E1807BF140013ECA0 /* MTTimingFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MTTimingFunctions.c; sourceTree = SOURCE_ROOT; };
+		C269544D1807BF140013ECA0 /* MTPencilEasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTPencilEasingFunctions.h; sourceTree = SOURCE_ROOT; };
+		C269544E1807BF140013ECA0 /* MTPencilEasingFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MTPencilEasingFunctions.c; sourceTree = SOURCE_ROOT; };
 		C2F27D8917F21316004539A1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MTPencil/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		C2F27D8B17F2132F004539A1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -124,8 +124,8 @@
 				C206CFED17F0E94100BFE527 /* MTPencilStep.h */,
 				C206CFEE17F0E94100BFE527 /* MTPencilStep.m */,
 				C24250ED17F117DA00B6142F /* MTPencilStep_Private.h */,
-				C269544D1807BF140013ECA0 /* MTTimingFunctions.h */,
-				C269544E1807BF140013ECA0 /* MTTimingFunctions.c */,
+				C269544D1807BF140013ECA0 /* MTPencilEasingFunctions.h */,
+				C269544E1807BF140013ECA0 /* MTPencilEasingFunctions.c */,
 			);
 			name = MTPencil;
 			sourceTree = "<group>";
@@ -355,7 +355,7 @@
 			files = (
 				C206CFEF17F0E94100BFE527 /* MTPencilStep.m in Sources */,
 				C25150AC180756F800F37DCE /* MTTextExampleViewController.m in Sources */,
-				C269544F1807BF140013ECA0 /* MTTimingFunctions.c in Sources */,
+				C269544F1807BF140013ECA0 /* MTPencilEasingFunctions.c in Sources */,
 				C266AB4615F52693001C3DA2 /* main.m in Sources */,
 				C266AB4715F52693001C3DA2 /* MTAppDelegate.m in Sources */,
 				C266AB4B15F52693001C3DA2 /* MTSimpleExampleViewController.m in Sources */,

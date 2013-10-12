@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mysterious Trousers. All rights reserved.
 //
 
-#import "MTTimingFunctions.h"
+#import "MTPencilEasingFunctions.h"
 
 
 @class MTPencil;
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSUInteger, MTPencilStepSpeed) {
 @property (nonatomic, assign          ) CGPathRef          appendPath;
 @property (nonatomic, assign, readonly) CGFloat            length;
 @property (nonatomic, copy            ) NSAttributedString *attributedString;
-@property (nonatomic, assign          ) MTTimingFunction   easingFunction;
+@property (nonatomic, assign          ) MTPencilEasingFunction   easingFunction;
 @property (nonatomic, copy            ) void               (^completion)(MTPencilStep *step);
 @property (nonatomic, copy            ) void               (^eraseCompletion)(MTPencilStep *step);
 
@@ -132,7 +132,7 @@ typedef NS_ENUM(NSUInteger, MTPencilStepSpeed) {
 
 - (MTPencilStep *)duration:(NSTimeInterval)duration;
 
-- (MTPencilStep *)easingFunction:(MTTimingFunction)easingFunction;
+- (MTPencilStep *)easingFunction:(MTPencilEasingFunction)easingFunction;
 
 
 ///------------------------------------------

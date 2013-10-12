@@ -42,7 +42,7 @@
         _animationSpeed         = NULL_NUMBER;
         _animationDuration      = NULL_NUMBER;
         _delay                  = 0;
-        _easingFunction         = kMTEaseLinear;
+        _easingFunction         = kMTPencilEaseLinear;
 
         // private
         _destinationType        = MTPencilStepDestinationTypeAbsolute;
@@ -251,7 +251,7 @@
     return self;
 }
 
-- (MTPencilStep *)easingFunction:(MTTimingFunction)easingFunction
+- (MTPencilStep *)easingFunction:(MTPencilEasingFunction)easingFunction
 {
     self.easingFunction = easingFunction;
     return self;
@@ -377,7 +377,7 @@ static CGFloat measuringLengthCurrentLength;
         self.lineWidth = step.lineWidth;
     }
 
-    if (self.easingFunction == kMTEaseLinear) {
+    if (self.easingFunction == kMTPencilEaseLinear) {
         self.easingFunction = step.easingFunction;
     }
 }
@@ -700,7 +700,7 @@ static const NSInteger fps      = 60;
 static const NSInteger second   = 1000;
 
 - (NSArray *)floatValuesWithDuration:(NSTimeInterval)duration
-                            function:(MTTimingFunction)timingFuction
+                            function:(MTPencilEasingFunction)timingFuction
                                 from:(CGFloat)fromFloat
                                   to:(CGFloat)toFloat
 {
