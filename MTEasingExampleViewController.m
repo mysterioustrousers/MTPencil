@@ -64,7 +64,7 @@
     self.drawButton.enabled     = NO;
     self.reverseButton.enabled  = NO;
     [_pencil erase];
-	[_pencil beginWithCompletion:^(MTPencil *pencil) {
+	[_pencil drawWithCompletion:^(MTPencil *pencil) {
         self.drawButton.enabled     = YES;
         self.reverseButton.enabled  = YES;
     }];

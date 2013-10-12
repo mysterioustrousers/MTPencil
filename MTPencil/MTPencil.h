@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, MTPencilState) {
 /// Controlling Playback
 ///------------------------------
 
-- (void)beginWithCompletion:(void (^)(MTPencil *pencil))completion;
+- (void)drawWithCompletion:(void (^)(MTPencil *pencil))completion;
 
 - (void)eraseWithCompletion:(void (^)(MTPencil *pencil))completion;
 

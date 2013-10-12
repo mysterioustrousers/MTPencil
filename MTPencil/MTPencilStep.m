@@ -528,7 +528,7 @@ static CGFloat measuringLengthCurrentLength;
         [reversedArray addObject:element];
     }
 
-    keyframeAnimation.values                = reversedArray;
+    keyframeAnimation.values = reversedArray;
     [self addAnimation:keyframeAnimation forKey:@"drawing"];
 }
 

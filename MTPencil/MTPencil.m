@@ -79,7 +79,7 @@
 
 #pragma mark (Controlling Playback)
 
-- (void)beginWithCompletion:(void (^)(MTPencil *pencil))completion
+- (void)drawWithCompletion:(void (^)(MTPencil *pencil))completion
 {
     if (self.state != MTPencilStepStateNotStarted) {
         return;
