@@ -137,7 +137,7 @@
         [self finish];
     }
     [CATransaction begin];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    [CATransaction setDisableActions:YES];
     self.strokeEnd = percent;
     [CATransaction commit];
 }
@@ -544,7 +544,6 @@ static CGFloat measuringLengthCurrentLength;
 - (void)assertHasEnoughInfoToDraw
 {
     BOOL hasStartPoint      = !CGPointEqualToPoint(self.startPoint, NULL_POINT);
-
     BOOL hasEndPoint        = !CGPointEqualToPoint(self.endPoint, NULL_POINT);
     BOOL hasDistance        = self.distance != NULL_NUMBER;
     BOOL hasAngle           = self.angle != NULL_NUMBER;

@@ -167,7 +167,7 @@
         }
         if (step.type != MTPencilStepTypeConfig) {
             if (CGPointEqualToPoint(step.startPoint, NULL_POINT)) {
-                if (previousStep) {
+                if (previousStep && previousStep.type != MTPencilStepTypeConfig) {
                     step.startPoint = previousStep.endPoint;
                 }
                 else {
@@ -195,6 +195,8 @@
 {
     [self erase];
     [self.steps removeAllObjects];
+    self.completion = nil;
+    self.eraseCompletion = nil;
 }
 
 
