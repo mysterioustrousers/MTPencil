@@ -54,23 +54,23 @@ typedef NS_ENUM(NSUInteger, MTPencilStepSpeed) {
 
 @interface MTPencilStep : CAShapeLayer
 
-@property (nonatomic, assign, readonly) MTPencilStepType   type;
-@property (nonatomic, assign, readonly) MTPencilStepState  state;
-@property (nonatomic, assign          ) CGPoint            startPoint;
-@property (nonatomic, assign          ) CGPoint            endPoint;
-@property (nonatomic, assign          ) CGFloat            angle;
-@property (nonatomic, assign          ) CGFloat            distance;
-@property (nonatomic, assign          ) UIRectEdge         toEdge;
-@property (nonatomic, assign          ) CGFloat            inset;
-@property (nonatomic, assign          ) NSTimeInterval     delay;
-@property (nonatomic, assign          ) CGFloat            animationSpeed;
-@property (nonatomic, assign          ) CGFloat            animationDuration;
-@property (nonatomic, assign          ) CGPathRef          appendPath;
-@property (nonatomic, assign, readonly) CGFloat            length;
-@property (nonatomic, copy            ) NSAttributedString *attributedString;
-@property (nonatomic, assign          ) MTPencilEasingFunction   easingFunction;
-@property (nonatomic, copy            ) void               (^completion)(MTPencilStep *step);
-@property (nonatomic, copy            ) void               (^eraseCompletion)(MTPencilStep *step);
+@property (nonatomic, assign, readonly) MTPencilStepType       type;
+@property (nonatomic, assign, readonly) MTPencilStepState      state;
+@property (nonatomic, assign          ) CGPoint                startPoint;
+@property (nonatomic, assign          ) CGPoint                endPoint;
+@property (nonatomic, assign          ) CGFloat                angle;
+@property (nonatomic, assign          ) CGFloat                distance;
+@property (nonatomic, assign          ) UIRectEdge             toEdge;
+@property (nonatomic, assign          ) CGFloat                inset;
+@property (nonatomic, assign          ) NSTimeInterval         delay;
+@property (nonatomic, assign          ) CGFloat                animationSpeed;
+@property (nonatomic, assign          ) CGFloat                animationDuration;
+@property (nonatomic, assign          ) CGPathRef              appendPath;
+@property (nonatomic, assign, readonly) CGFloat                length;
+@property (nonatomic, copy            ) NSAttributedString     *attributedString;
+@property (nonatomic, assign          ) MTPencilEasingFunction easingFunction;
+@property (nonatomic, copy            ) void                   (^completion)(MTPencilStep *step);
+@property (nonatomic, copy            ) void                   (^eraseCompletion)(MTPencilStep *step);
 
 
 ///------------------------------------------

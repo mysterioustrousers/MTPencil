@@ -146,7 +146,7 @@
 {
     [self removeAllAnimations];
     [self generatePath];
-
+    self.state = MTPencilStepStateDrawn;
 }
 
 - (void)erase
@@ -336,7 +336,7 @@ static CGFloat measuringLengthCurrentLength;
 - (UIFont *)font
 {
     if (!_font) {
-        _font = [UIFont fontWithName:@"HelveticaNeue" size:12];
+        _font = [UIFont systemFontOfSize:12];
     }
     return _font;
 }
@@ -387,6 +387,10 @@ static CGFloat measuringLengthCurrentLength;
 
     if (self.easingFunction == kMTPencilEaseLinear) {
         self.easingFunction = step.easingFunction;
+    }
+
+    if (step.type == MTPencilStepTypeConfig && step.delay > 0 && self.delay == 0) {
+        self.delay = step.delay;
     }
 }
 
@@ -521,12 +525,15 @@ static CGFloat measuringLengthCurrentLength;
 
 - (void)addErasingAnimation
 {
+    self.hidden = NO;
     self.state = MTPencilStepStateErasing;
+    [self calculateDuration];
     [self removeAllAnimations];
     CAKeyframeAnimation *keyframeAnimation  = [CAKeyframeAnimation new];
     keyframeAnimation.keyPath               = @"strokeEnd";
     keyframeAnimation.duration              = self.animationDuration;
     keyframeAnimation.delegate              = self;
+    keyframeAnimation.beginTime             = self.delay;
     NSArray *values                         = [self floatValuesWithDuration:self.animationDuration
                                                                    function:self.easingFunction
                                                                        from:0.0
@@ -584,7 +591,7 @@ void pathApplyLengthFunction(void *length, const CGPathElement *element)
  */
 float quadCurveToPointLength(CGPoint startPoint, CGPoint endPoint, CGPoint controlPoint)
 {
-    const int kSubdivisions = 100;
+    const NSInteger kSubdivisions = 100;
     const float step        = 1.0f / (float)kSubdivisions;
     float totalLength       = 0.0f;
     CGPoint prevPoint       = startPoint;
@@ -605,7 +612,7 @@ float quadCurveToPointLength(CGPoint startPoint, CGPoint endPoint, CGPoint contr
 
 float curveToPointLength(CGPoint startPoint, CGPoint endPoint, CGPoint controlPoint1, CGPoint controlPoint2)
 {
-    const int kSubdivisions = 100;
+    const NSInteger kSubdivisions = 100;
     const float step        = 1.0f / (float)kSubdivisions;
     float totalLength       = 0.0f;
     CGPoint prevPoint       = startPoint;

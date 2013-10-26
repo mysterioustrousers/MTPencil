@@ -73,7 +73,7 @@
 - (void)setupText
 {
     [[_pencil move] to:CGPointMake(10, 100)];
-    [[[_pencil draw] string:@"Mysterious\nTrousers"] font:[UIFont fontWithName:@"HelveticaNeue" size:60]];
+    [[[_pencil draw] string:@"Mysterious\nTrousers"] font:[UIFont systemFontOfSize:60]];
 }
 
 

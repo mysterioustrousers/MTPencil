@@ -27,7 +27,7 @@
 
 	_pencil = [MTPencil pencilWithView:self.view];
     [[_pencil move] to:CGPointMake(10, 100)];
-    [[[[_pencil draw] string:@"Mysterious\nTrousers"] font:[UIFont fontWithName:@"HelveticaNeue" size:60]] duration:3];
+    [[[[_pencil draw] string:@"Mysterious\nTrousers"] font:[UIFont systemFontOfSize:60]] duration:3];
 }
 
 

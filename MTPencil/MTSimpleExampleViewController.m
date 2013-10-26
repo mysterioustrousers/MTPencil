@@ -10,10 +10,11 @@
 #import "MTPencil.h"
 
 
-@interface MTSimpleExampleViewController ()
-@property (nonatomic, strong)          MTPencil *pencil;
-@property (nonatomic, weak  ) IBOutlet UIButton *drawButton;
-@property (nonatomic, weak  ) IBOutlet UIButton *reverseButton;
+@interface MTSimpleExampleViewController () <UITextFieldDelegate>
+@property (nonatomic, strong)          MTPencil    *pencil;
+@property (nonatomic, weak  ) IBOutlet UIButton    *drawButton;
+@property (nonatomic, weak  ) IBOutlet UIButton    *reverseButton;
+@property (nonatomic, weak  ) IBOutlet UITextField *delayTextField;
 @end
 
 
@@ -25,20 +26,7 @@
 
     self.reverseButton.enabled = NO;
 
-    MTPencilStepSpeed speed = 100;
-
-	_pencil = [MTPencil pencilWithView:self.view];
-
-    [[_pencil config] strokeColor:[UIColor darkGrayColor]];
-	[[_pencil move] to:CGPointMake(100, 200)];
-	[[[_pencil draw] angle:MTPencilStepAngleUpRight distance:20]    speed:speed];
-	[[[_pencil draw] angle:MTPencilStepAngleUp      distance:50]    speed:speed];
-	[[[_pencil draw] angle:MTPencilStepAngleRight   distance:100]	speed:speed];
-	[[[_pencil draw] angle:MTPencilStepAngleDown    distance:200]	speed:speed];
-	[[[_pencil draw] angle:MTPencilStepAngleLeft	distance:100]	speed:speed];
-	[[[_pencil draw] angle:MTPencilStepAngleUp      distance:123]	speed:speed];
-	[[[_pencil draw] angle:MTPencilStepAngleUpLeft  distance:20]    speed:speed];
-
+    [self configurePencil];
 }
 
 
@@ -65,5 +53,39 @@
         self.reverseButton.enabled  = YES;
     }];
 }
+
+
+
+
+#pragma mark - DELEGATE text field
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self configurePencil];
+    return YES;
+}
+
+
+
+#pragma mark - Private
+
+- (void)configurePencil
+{
+    MTPencilStepSpeed speed = 100;
+    NSTimeInterval delay    = [self.delayTextField.text integerValue];
+
+    _pencil = [MTPencil pencilWithView:self.view];
+    [[[_pencil config] delay:delay] strokeColor:[UIColor darkGrayColor]];
+	[[_pencil move] to:CGPointMake(100, 200)];
+	[[[_pencil draw] angle:MTPencilStepAngleUpRight distance:20]    speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleUp      distance:50]    speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleRight   distance:100]	speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleDown    distance:200]	speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleLeft	distance:100]	speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleUp      distance:123]	speed:speed];
+	[[[_pencil draw] angle:MTPencilStepAngleUpLeft  distance:20]    speed:speed];
+}
+
 
 @end

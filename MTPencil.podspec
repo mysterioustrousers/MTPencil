@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = "MTPencil"
-  s.version       = "0.1.0"
+  s.version       = "0.1.1"
   s.summary       = "Library for animated line drawing (like an invisible pencil)."
   s.homepage      = "https://github.com/mysterioustrousers/MTPencil"
   s.license       = 'MIT'

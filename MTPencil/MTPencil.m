@@ -246,8 +246,8 @@
             [step inheritFromStep:finishedStep];
             if (step.type == MTPencilStepTypeConfig) {
                 step.startPoint = step.endPoint = finishedStep.endPoint;
-                step.state = MTPencilStepStateDrawn;
-                finishedStep = step;
+                step.state      = MTPencilStepStateDrawn;
+                finishedStep    = step;
                 continue;
             }
             step.hidden = YES;
