@@ -150,7 +150,7 @@
             [step scrub:1.0];
         }
         else {
-            CGFloat stepScrubLength = step.length - abs(scrubLength);
+            CGFloat stepScrubLength = step.length - fabs(scrubLength);
             CGFloat scrubPercent = stepScrubLength / step.length;
             [step scrub:scrubPercent];
             return;

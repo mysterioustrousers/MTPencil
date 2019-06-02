@@ -163,7 +163,7 @@ double MTPencilEasingFunctionEaseInElastic(double t, double b, double c, double 
 
     t/=d;
     if (t==0) return b;  if (t==1) return b+c;  if (!p) p=d*.3;
-    if (a < abs(c)) { a=c; s=p/4; }
+    if (a < fabs(c)) { a=c; s=p/4; }
     else s = p/(2*M_PI) * asin (c/a);
     t-=1;
     return -(a*pow(2,10*t) * sin( (t*d-s)*(2*M_PI)/p )) + b;
@@ -174,7 +174,7 @@ double MTPencilEasingFunctionEaseOutElastic(double t, double b, double c, double
     double p=0, a=c;
     t/=d;
     if (t==0) return b;  if (t==1) return b+c;  if (!p) p=d*.3;
-    if (a < abs(c)) { a=c; s=p/4; }
+    if (a < fabs(c)) { a=c; s=p/4; }
     else s = p/(2*M_PI) * asin (c/a);
     return a*pow(2,-10*t) * sin( (t*d-s)*(2*M_PI)/p ) + c + b;
 }
@@ -184,7 +184,7 @@ double MTPencilEasingFunctionEaseInOutElastic(double t, double b, double c, doub
     double p=0, a=c;
     t/=(d/2);
     if (t==0) return b;  if (t==2) return b+c;  if (!p) p=d*(.3*1.5);
-    if (a < abs(c)) { a=c; s=p/4; }
+    if (a < fabs(c)) { a=c; s=p/4; }
     else s = p/(2*M_PI) * asin(c/a);
     if (t < 1) {
         t-=1;
