@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, MTPencilStepSpeed) {
 
 
 
-@interface MTPencilStep : CAShapeLayer
+@interface MTPencilStep : CAShapeLayer <CAAnimationDelegate>
 
 @property (nonatomic, assign, readonly) MTPencilStepType       type;
 @property (nonatomic, assign, readonly) MTPencilStepState      state;
